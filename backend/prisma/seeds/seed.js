@@ -1,6 +1,6 @@
-const { PrismaClient } = require('@prisma/client')
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt'
 
 
 async function main() {
@@ -10,8 +10,9 @@ async function main() {
         where: { email: 'alijonmrc@gmail.com' },
         update: {},
         create: {
+            role: 'ADMIN',
             email: 'alijonmrc@gmail.com',
-            name: "Alijon Kuvondikov",
+            fullName: "Alijon Kuvondikov",
             password: hashedPassword
         },
 
@@ -70,51 +71,50 @@ async function main() {
     })
 
     // data Student if not exists
-    await prisma.student.create({
-        data: {
-            fullName: "Karimboyev Elchinbek",
-            birthDate: new Date("2014-12-18"),
-            phone: "123456789",
-            classId: classBlue.id,
-            gradeId: grade5.id,
-        }
+    await prisma.student.createMany({
+        data: [
+            {
+                fullName: "Karimboyev Elchinbek",
+                birthDate: new Date("2014-12-18"),
+                phone: "123456789",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade5.id,
+            },
+            {
+                fullName: "Student A",
+                birthDate: new Date("2010-01-01"),
+                email: "a@school.com",
+                gender: true,
+                phone: "123456",
+                classId: classGreen.id,
+                gradeId: grade5.id,
+            },
+            {
+                fullName: "Student B",
+                birthDate: new Date("2010-02-01"),
+                email: "b@school.com",
+                gender: false,
+                phone: "987654",
+                classId: classBlue.id,
+                gradeId: grade6.id,
+            },
+            {
+                fullName: "Student C",
+                birthDate: new Date("2010-03-01"),
+                email: "c@school.com",
+                gender: false,
+                phone: "555555",
+                classId: classGreen.id,
+                gradeId: grade7.id,
+            }
+
+        ]
     })
 
 
 
-    // data Students connected to each Class + Grade
-    await prisma.student.create({
-        data: {
-            fullName: "Student A",
-            birthDate: new Date("2010-01-01"),
-            email: "a@school.com",
-            phone: "123456",
-            classId: classGreen.id,
-            gradeId: grade5.id,
-        }
-    });
 
-    await prisma.student.create({
-        data: {
-            fullName: "Student B",
-            birthDate: new Date("2010-02-01"),
-            email: "b@school.com",
-            phone: "987654",
-            classId: classBlue.id,
-            gradeId: grade6.id,
-        }
-    });
-
-    await prisma.student.create({
-        data: {
-            fullName: "Student C",
-            birthDate: new Date("2010-03-01"),
-            email: "c@school.com",
-            phone: "555555",
-            classId: classGreen.id,
-            gradeId: grade7.id,
-        }
-    });
 
 
 }
