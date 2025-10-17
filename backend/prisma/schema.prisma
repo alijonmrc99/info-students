@@ -78,10 +78,7 @@ model Student {
 
   gradeId Int?
   grade   Grade?     @relation(fields: [gradeId], references: [id])
-  
-  homeroomTeacherId Int?    // ✅ NEW
-  homeroomTeacher   HomeRoomTeacher? @relation(fields: [homeroomTeacherId], references: [id])
-  
+    
   files   File[]
 }
 
@@ -90,7 +87,7 @@ model HomeRoomTeacher {
   fullName  String
   email     String    @unique
   phone     String
-  students  Student[]   
+  grades    Grade[]
   user      User[]     // optional link if teacher has a user account
 }
 
@@ -106,7 +103,10 @@ model Grade {
   name     String
 
   students Student[]
+  teacherId   Int?
+  teacher  HomeRoomTeacher? @relation(fields: [teacherId], references: [id]) 
   posts Posts[]
+ 
 }
 
 model File {

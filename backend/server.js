@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes.js';
 import authMiddleware from './middleware/auth.middleware.js';
 import prisma from './prisma/client.js';
 import studentRoutes from './routes/students.route.js';
+import teacherRoutes from './routes/teachers.routes.js';
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,8 @@ app.get('/', (req, res) => res.send('API up'));
 app.use('/api/auth', authRoutes);
 // students
 app.use('/api/students', studentRoutes);
+// teachers
+app.use('/api/teachers', teacherRoutes);
 
 // protected example route
 app.get('/api/profile', authMiddleware, async (req, res) => {
