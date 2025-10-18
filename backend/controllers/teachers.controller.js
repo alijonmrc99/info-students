@@ -36,6 +36,8 @@ export async function createTeacher(req, res) {
 
 export async function updateTeacher(req, res) {
     try {
+        console.log(req.body);
+
         const updated = await hrService.updateTeacher(req.params.id, req.body);
         return res.json(updated);
     } catch (err) {

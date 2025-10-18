@@ -112,6 +112,23 @@ async function main() {
         ]
     })
 
+    await prisma.homeRoomTeacher.create({
+        data: {
+            fullName: "Karimboyev Elchinbek",
+            email: "fasdfaasd@gmail.com",
+            phone: "123456789",
+            grades: {
+                connect: [
+                    { id: grade5.id },
+                    { id: grade6.id },
+                    { id: grade7.id }
+                ]
+            },
+            phone: "98955985"
+        }
+    })
+
+
 
 
 

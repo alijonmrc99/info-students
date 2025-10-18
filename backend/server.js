@@ -6,11 +6,14 @@ import authMiddleware from './middleware/auth.middleware.js';
 import prisma from './prisma/client.js';
 import studentRoutes from './routes/students.route.js';
 import teacherRoutes from './routes/teachers.routes.js';
+import uploaRoutes from './routes/upload.routes.js';
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+// uploads (static files)
+app.use('/uploads', express.static('uploads'));
 
 // health
 app.get('/', (req, res) => res.send('API up'));
@@ -21,6 +24,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 // teachers
 app.use('/api/teachers', teacherRoutes);
+// upload route
+
+app.use('/api/upload', uploaRoutes);
+
 
 // protected example route
 app.get('/api/profile', authMiddleware, async (req, res) => {

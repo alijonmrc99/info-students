@@ -4,14 +4,22 @@ export async function listTeachers({ skip = 0, take = 50 } = {}) {
     return prisma.homeRoomTeacher.findMany({
         skip,
         take,
-        include: { class: true, students: true }
+        include: {
+            grades: true
+        }
     });
 }
 
 export async function getTeacherById(id) {
     return prisma.homeRoomTeacher.findUnique({
         where: { id: Number(id) },
-        include: { class: true, students: true }
+        include: {
+            grades: {
+                include: {
+                    students: true
+                }
+            }
+        }
     });
 }
 
@@ -27,38 +35,45 @@ export async function createTeacher(data) {
         phone: data.phone
     };
     if (data.gradeIds) payload.grades = {
-        create: data.gradeIds.map(id => (
-            { id: Number(id), name: String(Number(id) + 4) }
+        connect: data.gradeIds.map(id => (
+            { id: Number(id) }
         ))
     };
 
-    console.log(payload);
 
     // classId is unique at DB level; if class already has teacher, Prisma will throw P2002
     return prisma.homeRoomTeacher.create({
         data: payload,
-        include: {
-            grades: {
-                include: { grade: true },
-            }
-        }
     });
 }
 
 export async function updateTeacher(id, data) {
     const payload = {};
+    console.log(data);
+
     if (data.fullName !== undefined) payload.fullName = data.fullName;
     if (data.email !== undefined) payload.email = data.email;
     if (data.phone !== undefined) payload.phone = data.phone;
 
-    if (data.classId) payload.class = { connect: { id: Number(data.classId) } };
-    else if (data.className) payload.class = { connect: { name: data.className } };
-    else if (data.classId === null) payload.class = { disconnect: true };
+
+    if (data.gradeIds !== undefined) {
+        payload.grades = { set: [] };
+        prisma.homeRoomTeacher.update({
+            where: { id: Number(id) },
+            data: payload,
+        });
+        // Replace existing grade relations with the given IDs.
+        // Use `set` so old connections are removed and only the provided ids remain.
+        {
+            payload.grades = {
+                set: data.gradeIds.map(id => ({ id: Number(id) }))
+            };
+        }
+    }
 
     return prisma.homeRoomTeacher.update({
         where: { id: Number(id) },
         data: payload,
-        include: { class: true, students: true }
     });
 }
 

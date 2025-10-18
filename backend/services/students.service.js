@@ -7,7 +7,6 @@ export async function listStudents({ skip = 0, take = 50, classId, gradeId } = {
         include: {
             class: true,
             grade: true,
-            homeroomTeacher: { select: { id: true, fullName: true, email: true } },
             files: true
         },
         where: {
@@ -24,7 +23,7 @@ export async function countStudents() {
 export async function getStudentById(id) {
     return prisma.student.findUnique({
         where: { id: Number(id) },
-        include: { class: true, grade: true, homeroomTeacher: true, files: true }
+        include: { class: true, grade: true, files: true }
     });
 }
 
@@ -46,12 +45,13 @@ export async function createStudent(data) {
     if (data.gradeId) payload.grade = { connect: { id: Number(data.gradeId) } };
     else if (data.gradeName) payload.grade = { connect: { name: data.gradeName } };
 
-    // If you want to explicitly connect a homeroom teacher (not necessary if teacher assigned by class)
-    if (data.homeroomTeacherId) payload.homeroomTeacher = { connect: { id: Number(data.homeroomTeacherId) } };
+
 
     return prisma.student.create({
         data: payload,
-        include: { class: true, grade: true, homeroomTeacher: true }
+        include: {
+            class: true, grade: true
+        }
     });
 }
 
@@ -73,16 +73,58 @@ export async function updateStudent(id, data) {
     else if (data.gradeName) payload.grade = { connect: { name: data.gradeName } };
     else if (data.gradeId === null) payload.grade = { disconnect: true };
 
-    if (data.homeroomTeacherId) payload.homeroomTeacher = { connect: { id: Number(data.homeroomTeacherId) } };
-    else if (data.homeroomTeacherId === null) payload.homeroomTeacher = { disconnect: true };
+
+
+    if (data.files) payload.files = {
+        connect: data.files.map(id => (
+            { id: Number(id) }
+        ))
+    };
 
     return prisma.student.update({
         where: { id: Number(id) },
         data: payload,
-        include: { class: true, grade: true, homeroomTeacher: true }
+        include: { class: true, grade: true, files: true }
     });
 }
 
 export async function deleteStudent(id) {
     return prisma.student.delete({ where: { id: Number(id) } });
+}
+
+
+export async function studentsFiles(req, res) {
+    try {
+        if (!req.files) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        const data = req.files.map(item => ({
+            name: item.originalname,
+            path: item.path,
+        }))
+
+
+
+        const files = await prisma.$transaction(
+            data.map(file =>
+                prisma.file.create({
+                    data: file,
+                    select: {
+                        id: true
+                    }
+                })
+            )
+        );
+
+
+
+
+
+
+        return res.status(201).json(files.map(f => f.id));
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Failed to upload files" });
+    }
 }
