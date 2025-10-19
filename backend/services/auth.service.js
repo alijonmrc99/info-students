@@ -9,7 +9,7 @@ const SALT_ROUNDS = Number(process.env.SALT_ROUNDS || 10);
 const JWT_SECRET = process.env.JWT_SECRET;
 const ACCESS_TOKEN_EXPIRES = process.env.JWT_EXPIRES_IN || '15m';
 
-export async function registerUser({ email, password, fullName, phone, role = 'ADMIN', studentId = null, teacherId = null }) {
+export async function registerUser({ email, password, fullName, phone, role = 'ADMIN', teacherId = null }) {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) throw new Error('Email already in use');
 
@@ -21,13 +21,54 @@ export async function registerUser({ email, password, fullName, phone, role = 'A
             fullName,
             phone,
             role,
-            studentId,
             teacherId
         },
         select: { id: true, email: true, fullName: true, phone: true, role: true, createdAt: true }
     });
     return user;
 }
+
+export async function updateUser({ id, password, fullName, phone }) {
+
+    const payload = {};
+    if (password !== undefined) {
+        const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+        payload.password = hashed
+    }
+    if (fullName !== undefined) payload.email = fullName;
+    if (phone !== undefined) payload.phone = phone;
+
+    const user = await prisma.user.update({
+        where: { id: Number(id) },
+        data: payload,
+        select: { id: true, email: true, fullName: true, phone: true, role: true, createdAt: true }
+    });
+    return user;
+}
+export async function updateUserById({ id, email, password, fullName, phone, role, teacherId }) {
+
+    const payload = {};
+    if (password !== undefined) {
+        const hashed = await bcrypt.hash(password, SALT_ROUNDS);
+        payload.password = hashed
+    }
+    if (fullName !== undefined) payload.fullName = fullName;
+    if (phone !== undefined) payload.phone = phone;
+    if (role !== undefined) payload.role = role;
+    if (email !== undefined) payload.email = email;
+    if (teacherId !== undefined) payload.teacherId = teacherId;
+
+
+
+    const user = await prisma.user.update({
+        where: { id: Number(id) },
+        data: payload,
+        select: { id: true, email: true, fullName: true, phone: true, role: true, createdAt: true }
+    });
+    return user;
+}
+
+
 
 export function generateAccessToken(user) {
     // user: { id, email, role, ... }
@@ -68,3 +109,5 @@ export async function refreshAccessToken(refreshTokenString) {
 export async function logout(refreshTokenString) {
     await revokeRefreshToken(refreshTokenString);
 }
+
+

@@ -3,10 +3,9 @@ import { postService } from '../services/postService.js';
 
 export async function createPost(req, res) {
     try {
-        const { title, content } = req.body;
-        const imagePath = req.file ? req.file.path : null;
+        const { title, content, imageId } = req.body;
 
-        const post = await postService.create({ title, content, imagePath });
+        const post = await postService.create({ title, content, imageId, description });
         res.status(201).json(post);
     } catch (err) {
         res.status(400).json({ error: err.message });

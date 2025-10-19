@@ -15,7 +15,16 @@ async function main() {
             fullName: "Alijon Kuvondikov",
             password: hashedPassword
         },
-
+    })
+    await prisma.User.upsert({
+        where: { email: 'teacher@gmail.com' },
+        update: {},
+        create: {
+            role: 'TEACHER',
+            email: 'teacher1@gmail.com',
+            fullName: "Teacher Kuvondikov",
+            password: hashedPassword
+        },
     })
 
     const classGreen = await prisma.class.create({
@@ -112,18 +121,14 @@ async function main() {
         ]
     })
 
-    await prisma.homeRoomTeacher.create({
-        data: {
+    await prisma.homeRoomTeacher.upsert({
+        where: { email: "fasdfaasad@gmail.com" },
+        update: {},
+        create: {
             fullName: "Karimboyev Elchinbek",
-            email: "fasdfaasd@gmail.com",
+            email: "fasdfaasad@gmail.com",
             phone: "123456789",
-            grades: {
-                connect: [
-                    { id: grade5.id },
-                    { id: grade6.id },
-                    { id: grade7.id }
-                ]
-            },
+
             phone: "98955985"
         }
     })

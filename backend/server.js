@@ -30,9 +30,14 @@ app.use('/api/upload', uploaRoutes);
 
 
 // protected example route
-app.get('/api/profile', authMiddleware, async (req, res) => {
+app.get('/api/me', authMiddleware, async (req, res) => {
     const includeParams = req.user.role === 'TEACHER' ? {
-        teacher: true
+
+        teacher: {
+            include: {
+                grades: true
+            }
+        }
     } : {};
 
     const user = await prisma.user.findUnique({

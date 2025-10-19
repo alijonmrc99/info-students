@@ -54,13 +54,13 @@ model PostImages {
 model Posts {
   id        Int     @id @default(autoincrement())
   title     String
-  description String
-
+  content String
   gradeId Int
   grade   Grade     @relation(fields: [gradeId], references: [id])
 
   imageId   Int
   image     PostImages @relation(fields: [imageId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Student {
@@ -80,6 +80,7 @@ model Student {
   grade   Grade?     @relation(fields: [gradeId], references: [id])
     
   files   File[]
+  createdAt DateTime @default(now())
 }
 
 model HomeRoomTeacher {
@@ -89,6 +90,7 @@ model HomeRoomTeacher {
   phone     String
   grades    Grade[]
   user      User[]     // optional link if teacher has a user account
+  createdAt DateTime @default(now())
 }
 
 model Class {
@@ -113,7 +115,7 @@ model File {
   id       Int      @id @default(autoincrement())
   name     String
   path     String
-
+  createdAt DateTime @default(now())
   studentId Int?
   student   Student? @relation(fields: [studentId], references: [id])
 }
