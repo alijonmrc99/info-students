@@ -1,0 +1,1 @@
+export const ENDPOINT_PLACE_TYPE = `place-types`;

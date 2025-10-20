@@ -1,0 +1,52 @@
+.image-cropper {
+    background: rgba(0, 0, 0, 0.78);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .hidden {
+        visibility: hidden;
+        position: absolute;
+    }
+}
+
+.cropper-content {
+    // width: 500px;
+    // height: 500px;
+    background-color: #f0f5ff;
+    border-radius: 4px;
+    opacity: 1;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    .error-text {
+        color: rgb(235, 93, 93);
+        font-size: 12px;
+    }
+
+    .crop-button {
+        text-align: center;
+
+        button {
+            margin: 0 10px;
+        }
+    }
+}
+
+.position {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    overflow: hidden;
+    padding-top: 20px;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}

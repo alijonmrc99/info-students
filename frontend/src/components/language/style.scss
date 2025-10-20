@@ -1,0 +1,21 @@
+.lang {
+    margin-left: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+    // height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 1200px) {
+        margin: 0;
+
+    }
+}
+
+.ant-dropdown-menu-item {
+    padding: 5px 8px !important;
+}

@@ -1,0 +1,64 @@
+import { FC, useEffect } from "react";
+
+import { useTranslation } from "react-i18next";
+import { Button, Col, Divider, Row } from "antd";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../store";
+import { fetchOnePlaceTypes } from "../../thunks";
+import { placeTypeSlice } from "../../slices";
+import { TextFieldController } from "../../../../components/input/text-filed-controller";
+import { PLACE_NAME_EN, PLACE_NAME_UZ } from '../../constants'
+import { useTypePlace } from "../../hooks";
+import { ID } from "../../../../common/models";
+import './sytles.scss';
+
+export const PlaceTypesForm: FC<{ level?: number, parentId?: ID }> = () => {
+    const { contexHolder, control, setValue, isLoading, handleSendForm } = useTypePlace();
+    const { t } = useTranslation();
+    const { id } = useParams()
+    const dispatch = useAppDispatch();
+    const { result: place_type } = useAppSelector(state => state.place_type);;
+
+    useEffect(() => {
+        if (id) {
+            dispatch(fetchOnePlaceTypes(id))
+        }
+    }, [t])
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+
+        return () => {
+            dispatch(placeTypeSlice.actions.emptyState())
+        }
+    }, [t])
+
+    useEffect(() => {
+        if (place_type) {
+            setValue('id', id)
+            setValue('nameUz', place_type.nameUz)
+            setValue('nameEn', place_type.nameEn)
+        }
+
+    }, [place_type, t])
+
+    return <div className="place-form">
+        <Divider orientation="left">
+            <h4>{place_type?.name ? `${place_type.name.slice(0, 100)} ...` : `${t('new')} ${t('period').toLowerCase()} ${t('add').toLowerCase()} `}</h4>
+        </Divider>
+        <form onSubmit={handleSendForm}>
+            <Row gutter={20} className="form-item">
+                <Col xs={24} md={12}>
+                    <TextFieldController control={control} placeholder={t('preiod_name_uz')} name={PLACE_NAME_UZ} label={t('preiod_name_uz')} />
+                </Col>
+                <Col xs={24} md={12}>
+                    <TextFieldController control={control} placeholder={t('preiod_name_en')} name={PLACE_NAME_EN} label={t('preiod_name_en')} />
+                </Col>
+
+            </Row>
+
+            {contexHolder}
+            <Button className="send-button" disabled={isLoading} type="primary" htmlType="submit">{t('save')}</Button>
+        </form>
+    </div >
+}

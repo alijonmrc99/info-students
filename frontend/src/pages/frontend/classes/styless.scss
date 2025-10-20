@@ -1,0 +1,37 @@
+.classes {
+    padding: 20px;
+    background-color: rgba(46, 53, 59, 0.5);
+    border-radius: 15px;
+    margin: 50px;
+    height: calc(100vh - 302px);
+
+    .title {
+        text-align: center;
+        color: #fff;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .links {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+
+        a.card {
+            text-decoration: none;
+            width: 100%;
+
+            background-color: rgba(33, 53, 71, 0.8);
+            color: #fff;
+            padding: 20px 50px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: rgba(33, 53, 71, 1);
+            }
+        }
+    }
+}

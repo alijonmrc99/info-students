@@ -1,0 +1,52 @@
+.filter-container {
+    .place-filter-content {
+        position: absolute;
+        top: 60px;
+        z-index: 10;
+        left: 15px;
+        width: 500px;
+        background-color: rgba($color: #fff, $alpha: 1);
+        padding: 0;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.5s;
+    }
+
+    h4 {
+        margin: 0;
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .place-filter-content {
+            width: 100%;
+            left: 0;
+        }
+
+    }
+
+    .show-backend {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    .visible {
+        display: block;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .filter-btn {
+        position: absolute;
+        top: 10px;
+        z-index: 10;
+        left: 180px;
+        height: 40px;
+
+        img {
+            width: 100%;
+        }
+    }
+}

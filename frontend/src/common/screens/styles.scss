@@ -1,0 +1,37 @@
+// 404 error page sytles
+.board-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    flex-direction: column;
+    font-weight: bold;
+    color: #333;
+    background-color: #f8f9fa;
+
+    p {
+        font-size: 4em;
+    }
+
+    img {
+        height: 40vh;
+    }
+
+    .not-found-btn {
+        margin-top: 40px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}
