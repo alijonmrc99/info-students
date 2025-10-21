@@ -7,11 +7,13 @@ import prisma from './prisma/client.js';
 import studentRoutes from './routes/students.route.js';
 import teacherRoutes from './routes/teachers.routes.js';
 import uploaRoutes from './routes/upload.routes.js';
+import cors from 'cors';
 // import postRoutes from './routes/post.routes.js'
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors())
 // uploads (static files)
 app.use('/uploads', express.static('uploads'));
 

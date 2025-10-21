@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ColumnType } from "antd/es/table";
 import { Button, Switch } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { IPlaceResive } from "../../models";
+import { IStudents } from "../../models";
 import { ROUTE_BACKEND_HOME, ROUTE_PLACES } from "../../../../common/constants/route.constants";
 import { DataTable } from "../../../../common/data-table";
 import './sytles.scss';
@@ -13,7 +13,7 @@ import { decimalToDMS } from "../../../../common/functions";
 
 export const PlaceListBackend: FC<{
     isLoading: boolean;
-    list: IPlaceResive[];
+    list: IStudents[];
     onDelete: (id: any) => void,
     onPrivate: (id: any, value: boolean) => void,
     isActing: boolean,

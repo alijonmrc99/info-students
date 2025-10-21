@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IPlaceResive } from '../models';
-import { fetchAllPlaces } from '../thunks';
-import { IPageable } from '../../../common/models';
-import result from 'antd/es/result';
+import { IStudents } from '../models';
+import { fetchAllStudents } from '../../students-list/thunks';
 
 export interface InitialStatePropsPlaces {
     isLoading: boolean;
-    result: IPageable<IPlaceResive> | null;
+    result: IStudents | null;
     error: any;
 }
 
@@ -22,31 +20,25 @@ export const placesSlice = createSlice({
     initialState,
     reducers: {
         emptyState: (state) => ({ ...state, result: null }),
-        toggleIsPrivate: (state, { payload: { id } }) => {
-            if (state.result) {
-                state.result.data = state.result.data.map((place) =>
-                    place.id === id ? { ...place, isPrivate: !place.isPrivate } : place
-                );
-            }
-        }
+
     },
     extraReducers: (builder) => {
 
-        builder.addCase(fetchAllPlaces.pending, (state) => ({
+        builder.addCase(fetchAllStudents.pending, (state) => ({
             ...state,
             isLoading: true,
             result: null,
             error: null,
         }));
 
-        builder.addCase(fetchAllPlaces.fulfilled, (state, { payload: { result } }) => ({
+        builder.addCase(fetchAllStudents.fulfilled, (state, { payload }) => ({
             ...state,
             isLoading: false,
-            result: result,
+            result: payload,
             error: null,
         }));
 
-        builder.addCase(fetchAllPlaces.rejected, (state, { payload }) => ({
+        builder.addCase(fetchAllStudents.rejected, (state, { payload }) => ({
             ...state,
             isLoading: false,
             result: null,

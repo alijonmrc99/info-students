@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ENDPOINT_PLACES } from '../endpoints';
-import { IPlaceResive } from '../models';
+import { IStudents } from '../models';
 import { httpApi } from '../../../App';
 import { ID, IPageable, IResponse } from '../../../common/models';
 
@@ -9,7 +9,7 @@ import { ID, IPageable, IResponse } from '../../../common/models';
 
 export const fetchAllPlaces = createAsyncThunk('places/getAll', async (params: any, { rejectWithValue }) => {
     try {
-        return await httpApi.get<IResponse<IPageable<IPlaceResive>>>(ENDPOINT_PLACES, params).then((response) => response);
+        return await httpApi.get<IResponse<IPageable<IStudents>>>(ENDPOINT_PLACES, params).then((response) => response);
     } catch (error) {
         return rejectWithValue(error);
     }
@@ -17,7 +17,7 @@ export const fetchAllPlaces = createAsyncThunk('places/getAll', async (params: a
 
 export const fetchOnePlace = createAsyncThunk('places/onePlace', async (id: ID, { rejectWithValue }) => {
     try {
-        return await httpApi.get<IResponse<IPlaceResive>>(`${ENDPOINT_PLACES}/${id}`, {}).then((response) => response);
+        return await httpApi.get<IResponse<IStudents>>(`${ENDPOINT_PLACES}/${id}`, {}).then((response) => response);
     } catch (error) {
         return rejectWithValue(error);
     }

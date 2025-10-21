@@ -27,10 +27,11 @@ export const Home: FC = () => {
             <Row className="main-body">
                 <Col xs={24} xl={12} className="main-body-text">
                     <div>
-                        <h1>O’zbekiston
-                            arxeologik yodgorliklar
-                            xaritasi websayti</h1>
-                        <p className="title-bottom">Oʻzbekiston – boy tarix va madaniyatga ega boʻlgan qadimiy yurt. Ushbu vebsayt sizga mamlakatimizdagi arxeologik yodgorliklar haqida ma’lumot berish, ularning joylashuvi va tarixi bilan tanishtirish uchun yaratilgan. Xarita orqali siz Oʻzbekistonning turli hududlarida joylashgan qadimiy shaharlar, ibodatxonalar, qal’alar va boshqa tarixiy obidalar bilan tanishishingiz mumkin.</p>
+                        <h1>Samarqand shahridagi
+                            Prezident maktabi websayti</h1>
+                        <p className="title-bottom">Prezident maktabi o'quvchilari haqida ma'lumotlar web sayti
+                            bu saytda siz o'quchilarning erishgan yutyqlari, sinflari va boshqa ko'plab ma'lumotlarni topishingiz mumkin.
+                        </p>
                         <Row justify="space-between">
                             <Col xs={6} className="couter">
                                 <p className="counter-number"><SlotCounter value={statistics?.total} /></p>

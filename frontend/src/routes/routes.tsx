@@ -44,7 +44,7 @@ export const routes = (): RouteObjectType[] => {
                     element: <ClassesPage />,
                 },
                 {
-                    path: `${ROUTE_GRADES}/:classId/:gradeId`,
+                    path: `${ROUTE_GRADES}/:gradeId/:classId`,
                     element: <StudentsList />,
                 },
 

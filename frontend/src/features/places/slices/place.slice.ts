@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IPlaceResive } from '../models';
+import { IStudents } from '../models';
 import { fetchOnePlace } from '../thunks';
 export interface InitialStateProps {
     isLoading: boolean;
-    result: IPlaceResive | null;
+    result: IStudents | null;
     error: any;
 }
 
