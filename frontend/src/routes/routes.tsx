@@ -18,7 +18,8 @@ import { PlaceTypes } from "../pages/backend/place-types/periods";
 import { PlaceTypesForm } from "../features/type-of-place/components/place-type-form";
 import { GreadesPage } from "../pages/frontend/grades";
 import { ClassesPage } from "../pages/frontend/classes";
-import { StudentsList } from "../pages/frontend/students-list";
+import { StudentsList, StudentPage } from "../pages/frontend/students-list";
+
 
 export type RouteObjectType = IndexRouteObject |
     (Omit<NonIndexRouteObject, "children"> & { children: (RouteObject & { roles?: RoleTypeEnums[] })[] }) & { roles?: RoleTypeEnums[] }
@@ -46,6 +47,10 @@ export const routes = (): RouteObjectType[] => {
                 {
                     path: `${ROUTE_GRADES}/:gradeId/:classId`,
                     element: <StudentsList />,
+                },
+                {
+                    path: `${ROUTE_GRADES}/:gradeId/:classId/:studentId`,
+                    element: <StudentPage />,
                 },
 
 

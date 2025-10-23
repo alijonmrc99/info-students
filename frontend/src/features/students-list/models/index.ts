@@ -1,1 +1,1 @@
-export * from './IPlaces';
+export * from './IStudents';

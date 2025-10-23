@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ENDPOINT_STUDENTS } from '../endpoints';
-import { IPlaceResive } from '../models';
 import { httpApi } from '../../../App';
-import { ID, IResponse } from '../../../common/models';
-import { IStudents } from '../../places/models';
+import { ID } from '../../../common/models';
+import { IStudent, IStudents } from '../models';
 
 
 
@@ -18,7 +17,7 @@ export const fetchAllStudents = createAsyncThunk(`students/all`, async (params: 
 
 export const fetchOneStundent = createAsyncThunk('students/onePlace', async (id: ID, { rejectWithValue }) => {
     try {
-        return await httpApi.get<IResponse<IPlaceResive>>(`${ENDPOINT_STUDENTS}/${id}`, {}).then((response) => response);
+        return await httpApi.get<IStudent>(`${ENDPOINT_STUDENTS}/${id}`, {}).then((response) => response);
     } catch (error) {
         return rejectWithValue(error);
     }

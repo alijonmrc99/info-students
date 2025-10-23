@@ -4,7 +4,7 @@ import { Col, Row } from "antd";
 import { Language } from "../language";
 import { IMenuData, MenuDataContext } from "../../common/contexts";
 import { Link } from "react-router-dom";
-import { ROUTE_ABOUT, } from "../../common/constants/route.constants";
+import { ROUTE_ABOUT, ROUTE_GRADES, } from "../../common/constants/route.constants";
 import { useTranslation } from "react-i18next";
 
 export const Menu: FC = () => {
@@ -15,6 +15,9 @@ export const Menu: FC = () => {
             <Row style={menu ? { right: 0 } : {}} className={`menu`} align={'middle'}>
                 <Col className="menu-item">
                     <Link to={ROUTE_ABOUT}>{t("about")}</Link>
+                </Col>
+                <Col className="menu-item">
+                    <Link to={ROUTE_GRADES}>{t("Students")}</Link>
                 </Col>
                 <Col> <Language /></Col>
             </Row>

@@ -19,7 +19,7 @@ router.post("/image", authMiddleware, uploadStudentImage.single("image"), (req, 
 router.post("/post", authMiddleware, uploadPostFile.single("image"), postImage);
 ``
 // upload multi file, field name = "files"
-router.post("/files", authMiddleware, uploadStudentFile.multiple("files", 15), studentsFiles);
+router.post("/files", uploadStudentFile.multiple("files", 15), studentsFiles);
 
 router.delete("/files/:id", authMiddleware, deleteFileById);
 

@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', listStudents);
 router.get('/:id', getStudent);
 router.post('/', authMiddleware, authMiddleware, isAdmin, createStudent);
-router.put('/:id', authMiddleware, isAdmin, updateStudent);
+router.put('/:id', updateStudent);
 router.delete('/:id', authMiddleware, isAdmin, deleteStudent);
 
 export default router;

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IPlaceResive } from '../models';
 import { fetchOneStundent } from '../thunks';
+import { IStudent } from '../models';
 export interface InitialStateProps {
     isLoading: boolean;
-    result: IPlaceResive | null;
+    result: IStudent | null;
     error: any;
 }
 
@@ -31,7 +31,7 @@ export const studentSlice = createSlice({
         builder.addCase(fetchOneStundent.fulfilled, (state, { payload }) => ({
             ...state,
             isLoading: false,
-            result: payload.result,
+            result: payload,
             error: null,
         }));
 

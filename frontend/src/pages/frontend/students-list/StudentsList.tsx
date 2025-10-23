@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from "react";
-import { GRADES_ARRAY } from "../../../common/constants/base.constants";
 import '../grades/styless.scss'
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { fetchAllStudents } from "../../../features/students-list/thunks";
-import { Empty } from "antd";
+
 export const StudentsList: FC = () => {
     const dispatch = useAppDispatch();
 
@@ -24,12 +23,13 @@ export const StudentsList: FC = () => {
                 <h3 className="title">Students List</h3>
                 <div className="links">
                     {
-                        result?.data.length == 0 ?
-                            <div className="emprt_text">No Students Found</div>
-                            :
-                            result?.data.map((item, index) => (
-                                <Link to={`${item.id}`} className="card" key={item.id}>{index + 1}. {item.fullName}</Link>
-                            ))
+                        isLoading ? <div className="emprt_text">Loading...</div> :
+                            result?.data.length == 0 ?
+                                <div className="emprt_text">No Students Found</div>
+                                :
+                                result?.data.map((item, index) => (
+                                    <Link to={`${item.id}`} className="card" key={item.id}>{index + 1}. {item.fullName}</Link>
+                                ))
                     }
                 </div>
 
