@@ -1,8 +1,7 @@
 import { FC, useEffect } from "react";
 import './styless.scss'
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { use } from "i18next";
 import { fetchOneStundent } from "../../../features/students-list/thunks";
 import { Col, Row } from "antd";
 import boy from '../../../assets/images/boy.png';
@@ -26,7 +25,7 @@ export const StudentPage: FC = () => {
             <Row gutter={50} className="links"> {
                 isLoading ? <Col className="emprt_text">Loading...</Col> :
                     <>
-                        <Col xs={24} md={6} className="student_image">
+                        <Col xs={24} xl={8} md={10} xxl={5} className="student_image">
                             <img src={
                                 result?.imagePath ? result?.imagePath :
                                     result?.gender ? boy : girl

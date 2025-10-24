@@ -7,22 +7,20 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { IPaginationData, IPlaceFilterData, PaginationDataContext, PlaceFilterContext } from '../../../common/contexts';
 import { httpApi } from '../../../App';
-import { ENDPOINT_PLACES } from '../../../features/places/endpoints';
-import { fetchAllPlaces } from '../../../features/places/thunks';
-import { PlaceListBackend } from '../../../features/places/components/place-list/PlaceList';
 import { MainPagination } from '../../../common/pagination';
-import { placesSlice } from '../../../features/places/slices';
-import { notificationSlice } from '../../../common/notification';
 import { PlaceFilter } from '../../../components/palce-filter/PlaceFIlter';
+import { StudentsListBackend } from '../../../features/students-list/components/students-list/StudentsList';
+import { ENDPOINT_STUDENTS } from '../../../features/students-list/endpoints';
+import { fetchAllStudents } from '../../../features/students-list/thunks';
 
 
-export const Places: FC = () => {
+export const Students: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [isDeleting, setIsDeleting] = useState(false);
-    const [isActing, setIsActing] = useState(false);
-    const { result, isLoading } = useAppSelector(state => state.places);
+    // const [isActing, setIsActing] = useState(false);
+    const { result, isLoading } = useAppSelector(state => state.students);
     const [modal, contexHolder] = Modal.useModal();
     const { pagination, setPagination } = useContext(PaginationDataContext) as IPaginationData
     const { filter } = useContext(PlaceFilterContext) as IPlaceFilterData
@@ -40,33 +38,33 @@ export const Places: FC = () => {
 
     const onDelete = (id: string,) => {
         setIsDeleting(true);
-        httpApi.delete(`${ENDPOINT_PLACES}/${id}`, {})
+        httpApi.delete(`${ENDPOINT_STUDENTS}/${id}`, {})
             .then(() => {
-                dispatch(fetchAllPlaces({ ...pagination, filter }))
+                dispatch(fetchAllStudents({ ...pagination, filter }))
             })
             .finally(() => {
                 setIsDeleting(false)
             })
     }
 
-    const onPrivate = (id: string, value: boolean) => {
-        setIsActing(true);
-        httpApi.put(`${ENDPOINT_PLACES}/${id}`, { isPrivate: value })
-            .then(() => {
-                dispatch(placesSlice.actions.toggleIsPrivate({ id }))
+    // const onPrivate = (id: string, value: boolean) => {
+    //     setIsActing(true);
+    //     httpApi.put(`${ENDPOINT_STUDENTS}/${id}`, { isPrivate: value })
+    //         .then(() => {
+    //             // dispatch(placesSlice.actions.toggleIsPrivate({ id }))
 
-            }).catch(err => {
-                dispatch(notificationSlice.actions.open({ message: err.response.data.message, type: "error" }))
-            }
-            ).finally(() => {
-                setIsActing(false)
-            })
-    }
+    //         }).catch(err => {
+    //             dispatch(notificationSlice.actions.open({ message: err.response.data.message, type: "error" }))
+    //         }
+    //         ).finally(() => {
+    //             setIsActing(false)
+    //         })
+    // }
 
     const onChange = (data: any) => setPagination(data)
 
     useEffect(() => {
-        dispatch(fetchAllPlaces({ ...pagination, ...filter }))
+        dispatch(fetchAllStudents({ ...pagination, ...filter }))
     }, [t, pagination, filter])
 
 
@@ -91,11 +89,11 @@ export const Places: FC = () => {
                 defaultCurrent={pagination.page}
             />
         </Flex> <br />
-        <PlaceListBackend list={result?.data || []}
-            isActing={isActing}
+        <StudentsListBackend list={result?.data || []}
+            // isActing={isActing}
             isDeleting={isDeleting}
             isLoading={isLoading}
-            onPrivate={onPrivate}
+            // onPrivate={onPrivate}
             onDelete={confirm} />
 
         <br /><Flex justify='end'>

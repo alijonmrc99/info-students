@@ -5,7 +5,7 @@ import { IPaginationData, PaginationDataContext } from "../../common/contexts";
 import { FlagOutlined, ProfileOutlined, SnippetsOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppSelector } from "../../store";
 import { Menu } from "antd";
-import { ROUTE_PERIODS, ROUTE_PLACES, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../../common/constants/route.constants";
+import { ROUTE_PERIODS, ROUTE_STUDENTS, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../../common/constants/route.constants";
 
 export const MainMenuBackend: FC = () => {
     const { t } = useTranslation();
@@ -17,9 +17,9 @@ export const MainMenuBackend: FC = () => {
     const items = useMemo(() => [
 
         {
-            key: ROUTE_PLACES,
+            key: ROUTE_STUDENTS,
             icon: <ProfileOutlined />,
-            label: t('table_of_places'),
+            label: t('students'),
             roles: []
         },
         {
@@ -75,7 +75,7 @@ export const MainMenuBackend: FC = () => {
         selectedKeys: string[];
         keyPath: string[];
     }) => {
-        setPagination({ page: 0, pageSize: 10 });
+        setPagination({ page: 0, perPage: 30 });
         navigate(selectedMenu.keyPath.reverse().join("/"));
     };
 

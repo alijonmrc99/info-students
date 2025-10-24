@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import '../grades/styless.scss'
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
@@ -12,9 +12,6 @@ export const StudentsList: FC = () => {
     if (gradeId) {
         const grade = Number(gradeId) - 4
         useEffect(() => {
-            console.log("Class ID:", classId);
-            console.log("Grade ID:", gradeId);
-
             dispatch(fetchAllStudents({ classId, gradeId: grade }));
         }, [classId, gradeId]);
         return (

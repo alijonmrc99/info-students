@@ -20,7 +20,6 @@ export const meSlice = createSlice({
     initialState,
     reducers: {
         emptyState: (state) => ({ ...state, result: null }),
-        updateUserRestaurant: (state, { payload }) => ({ ...state, result: payload })
     },
     extraReducers: (builder) => {
 
@@ -31,10 +30,10 @@ export const meSlice = createSlice({
             error: null,
         }));
 
-        builder.addCase(fetchMe.fulfilled, (state, { payload: { result } }) => ({
+        builder.addCase(fetchMe.fulfilled, (state, { payload }) => ({
             ...state,
             isLoading: false,
-            result: result,
+            result: payload,
             error: null,
         }));
 

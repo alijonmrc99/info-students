@@ -48,6 +48,7 @@ export async function updateById(req, res) {
 export async function login(req, res) {
     try {
         const { email, password } = req.body;
+
         const { user, accessToken, refreshToken } = await loginUser({ email, password });
 
         // set refresh token as HttpOnly cookie

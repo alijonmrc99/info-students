@@ -4,55 +4,53 @@ import { useNavigate } from "react-router-dom";
 import { ColumnType } from "antd/es/table";
 import { Button, Switch } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { IPlaceResive } from "../../models";
-import { ROUTE_BACKEND_HOME, ROUTE_PLACES } from "../../../../common/constants/route.constants";
+import { IStudent } from "../../models";
+import { ROUTE_BACKEND_HOME, ROUTE_STUDENTS } from "../../../../common/constants/route.constants";
 import { DataTable } from "../../../../common/data-table";
 import './sytles.scss';
-import { decimalToDMS } from "../../../../common/functions";
 
 
-export const PlaceListBackend: FC<{
+export const StudentsListBackend: FC<{
     isLoading: boolean;
-    list: IPlaceResive[];
+    list: IStudent[];
     onDelete: (id: any) => void,
-    onPrivate: (id: any, value: boolean) => void,
-    isActing: boolean,
+    // onPrivate: (id: any, value: boolean) => void,
+    // isActing: boolean,
     isDeleting: boolean,
-}> = ({ isActing, isLoading, list, onDelete, onPrivate, isDeleting }) => {
+}> = ({ isLoading, list, onDelete, isDeleting }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
     const onSelectRow = (_index: any, value: any) => {
-        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_PLACES}/${value.id}`)
+        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_STUDENTS}/${value.id}`)
     }
 
 
     const columns = useMemo(() => [
         {
-            title: t('place_name'),
-            dataIndex: "name",
-            key: "name",
+            title: t('full_name'),
+            dataIndex: "fullName",
+            key: "fullName",
             width: 500,
             className: "name-column"
         },
         {
-            title: t('coordinateX'),
-            dataIndex: "coordinateX",
-            key: "coordinateX",
-            render: (item: any) => decimalToDMS(item, false),
+            title: t('grade'),
+            dataIndex: "grade",
+            key: "grade",
+            render: (item: any) => item?.name,
             width: 100,
 
         },
         {
-            title: t('coordinateY'),
-            dataIndex: "coordinateY",
-            key: "coordinateY",
-            render: (item: any) => decimalToDMS(item, true),
+            title: t('class'),
+            dataIndex: "class",
+            key: "class",
+            render: (item: any) => item?.name,
             width: 100,
-
         },
 
-        PrivateColumnType(isActing, onPrivate),
+        // PrivateColumnType(isActing, onPrivate),
 
         DeleteColumnType(isDeleting, onDelete)
     ], [])

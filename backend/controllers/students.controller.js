@@ -3,9 +3,10 @@ import * as studentService from '../services/students.service.js';
 
 export async function listStudents(req, res) {
     try {
-        const { skip, take, gradeId, classId } = req.query;
+        const { page, perPage, gradeId, classId } = req.query;
+        // adjust for 0-based index
 
-        const students = await studentService.listStudents({ skip: Number(skip) || 0, take: Number(take) || 50, gradeId, classId });
+        const students = await studentService.listStudents({ skip: Number(perPage * (page - 1)) || 0, take: Number(perPage) || 50, gradeId, classId });
         // get total count matching filters (requires studentService.countStudents)
         const total = await studentService.countStudents();
 
@@ -13,9 +14,9 @@ export async function listStudents(req, res) {
             data: students,
             meta: {
                 total,
-                currentPage: Math.floor((Number(skip) || 0) / (Number(take) || 50)) + 1,
-                perPage: Number(take) || 50,
-                totalPages: Math.ceil(total / (Number(take) || 50))
+                currentPage: Math.floor((Number(perPage * (page - 1)) || 0) / (Number(perPage) || 50)) + 1,
+                perPage: Number(perPage) || 50,
+                totalPages: Math.ceil(total / (Number(perPage) || 50))
             }
         }
         return res.json(response);

@@ -1,13 +1,11 @@
 import { IndexRouteObject, NonIndexRouteObject, RouteObject } from "react-router-dom";
 import { RoleTypeEnums } from "../common/constants/base.constants";
-import { ROUTE_ABOUT, ROUTE_BACKEND_HOME, ROUTE_CLASSES, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_PERIODS, ROUTE_PLACES, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_PERIODS, ROUTE_STUDENTS, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../common/constants/route.constants";
 import { Home } from "../pages/frontend/home/Home";
 import { LoginForm } from "../features/auth/components/login-form";
 import { BaseLayout } from "../layouts";
 import { Backend } from "../pages/backend/dashboard";
-import { Places } from "../pages/backend/places/Places";
-import { PlaceForm } from "../features/places/components/place-form";
-import { BulkUpload } from "../features/places/components/place-form/BulkUpload";
+import { Students } from "../pages/backend/students/Students";
 import { Periods } from "../pages/backend/periods";
 import { PeriodsForm } from "../features/periods/components/periods-form";
 import { Preservations } from "../pages/backend/state-of- preservation/periods";
@@ -19,6 +17,7 @@ import { PlaceTypesForm } from "../features/type-of-place/components/place-type-
 import { GreadesPage } from "../pages/frontend/grades";
 import { ClassesPage } from "../pages/frontend/classes";
 import { StudentsList, StudentPage } from "../pages/frontend/students-list";
+import { StudentsForm } from "../features/students-list/components/students";
 
 
 export type RouteObjectType = IndexRouteObject |
@@ -70,20 +69,16 @@ export const routes = (): RouteObjectType[] => {
             element: <Backend />,
             children: [
                 {
-                    path: ROUTE_PLACES,
-                    element: <Places />,
+                    path: ROUTE_STUDENTS,
+                    element: <Students />,
                 },
                 {
-                    path: `${ROUTE_PLACES}/bulk-upload`,
-                    element: <BulkUpload />,
+                    path: `${ROUTE_STUDENTS}/create`,
+                    element: <StudentsForm />,
                 },
                 {
-                    path: `${ROUTE_PLACES}/create`,
-                    element: <PlaceForm />,
-                },
-                {
-                    path: `${ROUTE_PLACES}/:id`,
-                    element: <PlaceForm />,
+                    path: `${ROUTE_STUDENTS}/:id`,
+                    element: <StudentsForm />,
                 },
                 {
                     path: `${ROUTE_PERIODS}`,

@@ -8,7 +8,7 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../store";
 import { IPlaceSend } from "../models";
-import { ROUTE_BACKEND_HOME, ROUTE_PLACES } from "../../../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_STUDENTS } from "../../../common/constants/route.constants";
 import { placeSlice } from "../slices/place.slice";
 import { onPlace } from "../thunks";
 import { PlaceScheme } from "../schemas";
@@ -58,7 +58,7 @@ export const usePlace = () => {
         dispatch(onPlace({ values: values, id: values.id }))
             .then(() => {
                 reset()
-                navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_PLACES}`)
+                navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_STUDENTS}`)
                 dispatch(placeSlice.actions.emptyState())
             })
             .catch(handleError)

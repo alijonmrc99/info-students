@@ -1,1 +1,1 @@
-export * from "./pleace.endpoints";
+export * from "./students.endpoints";

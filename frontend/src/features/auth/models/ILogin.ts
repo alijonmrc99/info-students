@@ -5,7 +5,11 @@ export interface ILoginQuery {
 
 export interface ILogin {
     error: any,
-    result: {
-        accessToken: string,
-    };
+    user: {
+        id: string,
+        email: string,
+        name: string,
+    },
+    accessToken: string,
+
 }

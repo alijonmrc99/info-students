@@ -1,1 +1,1 @@
-export * from './usePlace'
+export * from './useStudents'

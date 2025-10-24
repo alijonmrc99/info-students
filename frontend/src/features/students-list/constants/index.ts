@@ -1,1 +1,1 @@
-export * from "./place.constants";
+export * from "./students.constants";

@@ -1,1 +1,1 @@
-export * from './place.schema';
+export * from './students.schema';

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Space } from "antd";
 import {
     AUTH_FIELD_PASSWORD,
-    AUTH_FIELD_USER_NAME,
+    AUTH_FIELD_EMAIL,
 } from "../../constants";
 import { useLogin } from "../../hooks";
 import './styles.scss';
@@ -31,7 +31,7 @@ export const LoginForm: FC = withGuest(() => {
                                 <TextFieldController
                                     placeholder="Foydalanuvchi nomi"
                                     control={control}
-                                    name={AUTH_FIELD_USER_NAME}
+                                    name={AUTH_FIELD_EMAIL}
                                     className="login-input"
                                 />
                                 <TextFieldController

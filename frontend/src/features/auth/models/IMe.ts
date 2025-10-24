@@ -1,11 +1,13 @@
-import { RoleTypeEnums } from "../../../common/constants/base.constants";
+
 
 
 export interface IMe {
     fullName: string;
-    username: string;
+    phone?: string;
+    teacherId?: string;
+    id: string;
     email?: string;
-    roles: IRole[];
+    role: IRole;
 }
 
-export interface IRole { id: number, name: RoleTypeEnums, title: string }
+export type IRole = "ADMIN" | "TEACHER";

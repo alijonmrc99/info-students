@@ -194,7 +194,7 @@ async function main() {
                 gender: true,
                 classId: classGreen.id,
                 gradeId: grade5.id,
-            }
+            },
             {
                 fullName: "Eshmanov Humoyun Bobur o'g'li",
                 birthDate: new Date("2014-02-14"),

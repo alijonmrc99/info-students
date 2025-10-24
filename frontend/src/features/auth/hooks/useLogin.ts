@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom"
-import { AUTH_FIELD_PASSWORD, AUTH_FIELD_USER_NAME } from "../constants";
+import { AUTH_FIELD_PASSWORD, AUTH_FIELD_EMAIL } from "../constants";
 import { message } from "antd";
 import { ILoginQuery, ILogin } from "../models";
 import { HttpApi } from "../../../common/http";
@@ -17,7 +17,7 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { register, control, formState: { errors }, handleSubmit, setValue } = useForm({
         defaultValues: {
-            [AUTH_FIELD_USER_NAME]: "",
+            [AUTH_FIELD_EMAIL]: "",
             [AUTH_FIELD_PASSWORD]: "",
         },
         resolver: yupResolver(LoginSchema),
@@ -38,7 +38,7 @@ export const useLogin = () => {
     const onSubmit = (values: ILoginQuery) => {
         setIsLoading(true);
         login(values).then((response) => {
-            setBearerToken(response.result.accessToken);
+            setBearerToken(response.accessToken);
             navigate(ROUTE_BACKEND_HOME);
         }).catch((errors) => {
             handleErrors(errors);
@@ -63,7 +63,7 @@ export const useLogin = () => {
 
 export const login = (body: ILoginQuery): Promise<ILogin> => {
     const loginData = new URLSearchParams();
-    loginData.append('username', body.username);
+    loginData.append('email', body.username);
     loginData.append('password', body.password);
 
     return httpApi.post(ENDPOINT_AUTH_LOGIN, loginData.toString(), {

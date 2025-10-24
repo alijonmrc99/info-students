@@ -24,7 +24,7 @@ export const DatePickerController: FC<DatePickerControllerProps> = ({
       control={control}
       name={name}
       render={({ field: { value, ...fieldProps }, fieldState: { error } }) => {
-        const onChange = (date: any, dateString: string) => {
+        const onChange = (_date: dayjs.Dayjs | null, dateString: string | string[]) => {
           setValue(name, dateString)
         }
         return <Space style={{ width: '100%' }} size={'small'} direction={'vertical'}>

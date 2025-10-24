@@ -5,7 +5,7 @@ import { ColumnType } from "antd/es/table";
 import { Button, Switch } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { IStudents } from "../../models";
-import { ROUTE_BACKEND_HOME, ROUTE_PLACES } from "../../../../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_STUDENTS } from "../../../../common/constants/route.constants";
 import { DataTable } from "../../../../common/data-table";
 import './sytles.scss';
 import { decimalToDMS } from "../../../../common/functions";
@@ -23,7 +23,7 @@ export const PlaceListBackend: FC<{
     const navigate = useNavigate();
 
     const onSelectRow = (_index: any, value: any) => {
-        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_PLACES}/${value.id}`)
+        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_STUDENTS}/${value.id}`)
     }
 
 

@@ -1,2 +1,2 @@
-export * from "./StudentsList";
+export * from "./StudentsListFront";
 export * from "./StudentPage";
