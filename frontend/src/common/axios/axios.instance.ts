@@ -71,6 +71,7 @@ export const setBearerToken = (token: string) => {
 export const clearBearerToken = () => {
     localStorage.removeItem(BASE_AUTH_TOKEN);
     delete axios.defaults.headers.common["Authorization"];
+    localStorage.removeItem('role');
 
 }
 

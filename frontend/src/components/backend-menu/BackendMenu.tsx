@@ -2,10 +2,10 @@ import { FC, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IPaginationData, PaginationDataContext } from "../../common/contexts";
-import { FlagOutlined, ProfileOutlined, SnippetsOutlined, UserOutlined } from "@ant-design/icons";
+import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppSelector } from "../../store";
 import { Menu } from "antd";
-import { ROUTE_PERIODS, ROUTE_STUDENTS, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../../common/constants/route.constants";
+import { ROUTE_STUDENTS, ROUTE_USERS } from "../../common/constants/route.constants";
 
 export const MainMenuBackend: FC = () => {
     const { t } = useTranslation();
@@ -22,24 +22,7 @@ export const MainMenuBackend: FC = () => {
             label: t('students'),
             roles: []
         },
-        {
-            key: ROUTE_PERIODS,
-            icon: <FlagOutlined />,
-            label: t('periods'),
-            roles: []
-        },
-        {
-            key: ROUTE_PRESERVATIONS,
-            icon: <SnippetsOutlined />,
-            label: t('state_of_preservation'),
-            roles: []
-        },
-        {
-            key: ROUTE_TYPE_PLACE,
-            icon: <SnippetsOutlined />,
-            label: t('typeOfPlace'),
-            roles: []
-        },
+
         {
             key: ROUTE_USERS,
             icon: <UserOutlined />,

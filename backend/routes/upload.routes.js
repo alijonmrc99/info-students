@@ -11,8 +11,13 @@ const uploadStudentFile = createUploader("studentFiles");
 
 const router = Router();
 // upload single file, field name = "image"
-router.post("/image", authMiddleware, uploadStudentImage.single("image"), (req, res) => {
-    res.json({ path: req.file.path });
+router.post("/image", authMiddleware, uploadStudentImage.single("imagePath"), (req, res) => {
+    res.json({
+        success: true,
+        data: {
+            imagePath: req.file.path,
+        }
+    });
 });
 
 // upload single file, field name = "image"

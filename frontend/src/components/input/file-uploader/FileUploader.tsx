@@ -5,40 +5,42 @@ import { CheckCircleOutlined, ExclamationCircleOutlined, UploadOutlined } from '
 
 
 import './styles.scss'
-import { uploadFile } from "../../../common/functions";
+import { deleteFile, IFile, uploadFile } from "../../../common/functions";
 import { Col, message, Row, Spin } from "antd";
 import { useTranslation } from "react-i18next";
-import { ENDPOINT_BASE_URL } from "../../../common/constants/endpoind.constants";
 import { ID } from "../../../common/models";
+import { ENDPOINT_BASE_URL } from "../../../common/constants/endpoind.constants";
+
 
 interface FileUploaderProps {
     path: string;
-    aspect?: number;
     name: string;
     multiple?: boolean;
     accept?: string;
     label?: string;
     setIsLoaded?: (value: any) => void;
     customStyle?: React.CSSProperties,
-    setValue?: UseFormSetValue<any>
+    setValue: UseFormSetValue<any>
 }
 
+
 export const FileUploader: React.FC<FileUploaderProps> = ({ setIsLoaded, accept = "image/*", customStyle = { height: "40px" }, label, path, multiple = false, setValue, name }) => {
-    const [images, setImages] = useState<(string | { id: ID, path: string })[]>([]);
+    const [files, setFiles] = useState<({ id: ID, path: string, name: string })[]>([]);
     const [stateOfFile, setStateOfFile] = useState<boolean | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [messageApi, contextHolder] = message.useMessage()
     const { t } = useTranslation()
     const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files ? Array.from(event.target.files) : [];
+        const curentFiles = event.target.files ? Array.from(event.target.files) : [];
 
         try {
             setIsLoading(true)
-            let result: any = await uploadFile(files, path, name)
-            if (result.success) {
+            let result: IFile | undefined = await uploadFile(path, name, curentFiles)
+            if (result?.success) {
                 setIsLoading(false)
                 messageApi.success({ content: t("upload_success") })
-                setValue && setValue(name, [...result.result.paths],)
+                setFiles(prevFiles => [...prevFiles, ...result!.files])
+                setValue(name, result!.files.map(item => item.id))
                 setIsLoaded && setIsLoaded({ loaded: true, success: "success" })
                 setStateOfFile(true)
             }
@@ -50,31 +52,9 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ setIsLoaded, accept 
             messageApi.error({ content: errorMessage })
         }
 
-        files && Array.from(files).forEach(file => {
-            if (file.type.startsWith("image/")) {
-
-                const imagePreviews = files.map((file) => {
-                    return new Promise((resolve) => {
-                        if (file.type.startsWith("image/")) {
-                            const reader = new FileReader();
-                            reader.onload = (e) => {
-                                if (e.target) {
-                                    resolve(e.target.result);
-                                }
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                });
-
-                Promise.all(imagePreviews).then((results) => setImages([...images, ...results as string[]]));
-            }
-        })
     };
 
-    // useEffect(() => {
-    //     setImages([...oldImages])
-    // }, [oldImages])
+
 
 
     return (
@@ -96,23 +76,29 @@ export const FileUploader: React.FC<FileUploaderProps> = ({ setIsLoaded, accept 
             {contextHolder}
             {
                 <Row gutter={15} className="image-container">
-                    {
-                        images?.map((src, index) => (
-                            <Col key={index} xs={4}>
-                                <div onClick={
-                                    () => console.log(src)
-                                }
-                                    className="delete-image">x</div>
-                                <div>
-
-                                    <img key={index}
-                                        src={(typeof src === "object") ? `${ENDPOINT_BASE_URL}${src.path}` : src}
-                                        alt={`preview-${index}`} />
-
+                    <Col span={24}>
+                        <p>Yangi yuklanganlar</p>
+                        {files.length > 0
+                            && files.map(file => (
+                                <div className="student-file" key={file.id}>
+                                    <a key={file.id} href={`${ENDPOINT_BASE_URL}${file.path}`} target="_blank" rel="noopener noreferrer">
+                                        {file.name}
+                                    </a>
+                                    <button type="button" onClick={() => {
+                                        deleteFile(file.id).then(() => {
+                                            setFiles(prevFiles => prevFiles.filter(f => f.id !== file.id));
+                                            setValue(name, files?.filter(f => f.id !== file.id).map(item => item.id))
+                                            messageApi.success({ content: t("file_delete_success") })
+                                        }
+                                        ).catch((_err) => {
+                                            messageApi.error({ content: t("file_delete_error") })
+                                        })
+                                    }} className="delete-file-button">
+                                        x
+                                    </button>
                                 </div>
-                            </Col>
-                        ))
-                    }
+                            ))}
+                    </Col>
                 </Row>
             }
 

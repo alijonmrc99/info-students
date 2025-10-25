@@ -11,10 +11,10 @@ interface IPaginationProps {
     defaultCurrent?: number,
 }
 
-export const defaultPaginationData = { page: 0, perPage: 30 };
+export const defaultPaginationData = { page: 1, perPage: 30 };
 
 export const MainPagination: FC<IPaginationProps> = ({ onChange, total = 1,
-    perPage = defaultPaginationData.perPage, defaultCurrent = 1 }) => {
+    perPage = defaultPaginationData.perPage, defaultCurrent = 1, }) => {
     useEffect(() => {
     }, [defaultCurrent])
     const { t } = useTranslation()

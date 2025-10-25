@@ -12,7 +12,10 @@ export async function postImage(req, res) {
             },
         });
 
-        return res.status(201).json(image);
+        return res.status(201).json({
+            success: true,
+            image
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: "Failed to upload image" });

@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { IPaginationData, IPlaceFilterData, PaginationDataContext, PlaceFilterContext } from '../../../common/contexts';
 import { httpApi } from '../../../App';
 import { MainPagination } from '../../../common/pagination';
-import { PlaceFilter } from '../../../components/palce-filter/PlaceFIlter';
 import { StudentsListBackend } from '../../../features/students-list/components/students-list/StudentsList';
 import { ENDPOINT_STUDENTS } from '../../../features/students-list/endpoints';
 import { fetchAllStudents } from '../../../features/students-list/thunks';
@@ -74,13 +73,13 @@ export const Students: FC = () => {
         {contexHolder}
 
         <Flex className='news-header' justify='space-between'>
-            <h3>{t('table_of_places')}</h3>
+            <h3>{t('students')}</h3>
             <div>
                 <Button style={{ marginRight: "20px" }} type='primary' onClick={() => navigate('bulk-upload')}>{t("import_from_excel")}</Button>
                 <Button type='primary' onClick={() => navigate('create')}>{t("add")}</Button>
             </div>
         </Flex>
-        <PlaceFilter where='back' />
+        {/* <PlaceFilter where='back' /> */}
         <Flex justify='end'>
             <MainPagination
                 onChange={onChange}

@@ -1,4 +1,5 @@
 import { httpApi } from "../../App";
+import { ID } from "../models";
 
 export function gpsToDecimal(gpsCoord: string): string {
     // Use a regular expression to parse the coordinate
@@ -41,21 +42,38 @@ export function decimalToDMS(coord: string, isLatitude: boolean): string {
 }
 
 export interface IFile {
-    success: boolean
-    data: {
-        path: string;
+    success: boolean;
+    files: { id: ID, path: string, name: string }[];
+}
+
+export const deleteFile = async (fileId: ID) => {
+    try {
+        const result = await httpApi.delete(`upload/files/${fileId}`, {});
+        if (result.success) {
+            return result;
+        }
+    }
+    catch (error) {
+        throw error
     }
 }
 
-export const uploadFile = async (files: any, path: string, name: string) => {
+export const uploadFile = async (path: string, name: string, files?: any, file?: any,) => {
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-        formData.append(`${name}[]`, files[i]); // Array sifatida yuboramiz
+    // if (!files || files.length === 0) {
+    //     throw new Error("No files to upload.");
+    // }
+    if (!file) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`${name}`, files[i]); // Array sifatida yuboramiz
+        }
+    } else {
+        formData.append(`${name}`, file);
     }
 
 
     try {
-        const result: IFile = await httpApi.post(`${path}`, formData, {
+        const result: IFile = await httpApi.post(`upload/${path}`, formData, {
             headers: {
                 acsept: "application/json",
                 'content-type': "multipart/form-data"

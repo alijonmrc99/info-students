@@ -6,7 +6,7 @@ export const useMe = () => {
     const dispatch = useAppDispatch();
     const { result, isLoading } = useAppSelector((state) => state.me);
     const isAuthorized = !!result;
-
+    localStorage.setItem('role', result?.role ? result.role : '');
     useEffect(() => {
         if (!result && !isLoading) {
             dispatch(fetchMe());

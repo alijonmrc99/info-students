@@ -30,12 +30,15 @@ export const meSlice = createSlice({
             error: null,
         }));
 
-        builder.addCase(fetchMe.fulfilled, (state, { payload }) => ({
-            ...state,
-            isLoading: false,
-            result: payload,
-            error: null,
-        }));
+        builder.addCase(fetchMe.fulfilled, (state, { payload: { user } }) => {
+
+            return ({
+                ...state,
+                isLoading: false,
+                result: user,
+                error: null,
+            });
+        });
 
         builder.addCase(fetchMe.rejected, (state, { payload }) => ({
             ...state,

@@ -1,4 +1,4 @@
-.place-form {
+.student-form {
     h4 {
         margin: 0;
     }
@@ -10,6 +10,24 @@
         width: 100%;
     }
 
+    .section2 {
+        margin-bottom: 50px;
+    }
+
+    .image-uploader {
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    .state-of-file {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
     .place-imges {
 
 
@@ -17,5 +35,29 @@
             width: 100%;
 
         }
+    }
+
+    .file-container {
+        list-style-type: disc;
+        padding-left: 0px;
+    }
+
+    .student-file {
+        margin-bottom: 5px;
+        display: flex;
+        font-size: 1em;
+        justify-content: space-between;
+        border-bottom: 1px dashed #ccc;
+    }
+
+    .delete-file-button {
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 5px;
+        width: 25px;
+        outline: none;
     }
 }

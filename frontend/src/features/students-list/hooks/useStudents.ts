@@ -31,7 +31,7 @@ export const usePlace = () => {
         mode: "onBlur"
     })
 
-    const [messageApi, contexHolder] = message.useMessage();
+    const [messageApi, contextHolder] = message.useMessage();
 
     const handleError = (errors: any) => {
         messageApi.open({
@@ -58,6 +58,6 @@ export const usePlace = () => {
     }
     const handleSendForm = handleSubmit(onSubmit);
 
-    return { control, getValues, watch, handleSendForm, setValue, isLoading, contexHolder, errors, register }
+    return { control, messageApi, getValues, watch, handleSendForm, setValue, isLoading, contextHolder, errors, register }
 }
 

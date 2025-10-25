@@ -41,5 +41,16 @@
     "female": "Ayol",
     "achievements": "Yutuqlari",
     "grade": "Sinf",
-    "class": "Guruh"
+    "class": "Guruh",
+    "achievment_files": "Yutuqlar fayllari",
+    "current_files": "Joriy fayllar",
+    "file_delete_error": "Fayl o'chirilmadi",
+    "file_delete_success": "Fayl muvaffaqiyatli o'chirildi",
+    "upload_success": "Yuklash muvaffaqiyatli",
+    "upload_error": "Yuklashda xatolik yuz berdi",
+    "student_image": "O'quvchi rasmi",
+    "student_info": "O'quvchi haqida ma'lumotlar",
+    "student_achievments": "O'quvchining yutuqlari va sertifikatlari",
+    "edit": "Tahrirlash",
+    "students": "O'quvchilar"
 }

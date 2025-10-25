@@ -111,18 +111,18 @@ export async function studentsFiles(req, res) {
                 prisma.file.create({
                     data: file,
                     select: {
-                        id: true
+                        id: true,
+                        name: true,
+                        path: true
                     }
                 })
             )
         );
 
-
-
-
-
-
-        return res.status(201).json(files.map(f => f.id));
+        return res.status(201).json({
+            success: true,
+            files: files
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: "Failed to upload files" });

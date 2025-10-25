@@ -1,17 +1,19 @@
 import { FC, useEffect } from "react";
 import './styless.scss'
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { fetchOneStundent } from "../../../features/students-list/thunks";
 import { Col, Row } from "antd";
 import boy from '../../../assets/images/boy.png';
 import girl from '../../../assets/images/girl.png';
 import { ENDPOINT_BASE_URL } from "../../../common/constants/endpoind.constants";
+import { useTranslation } from "react-i18next";
+import { EditFilled } from "@ant-design/icons";
 export const StudentPage: FC = () => {
     const dispatch = useAppDispatch();
     const { studentId } = useParams();
     const { result, isLoading } = useAppSelector(state => state.student);
-
+    const { t } = useTranslation();
     useEffect(() => {
         dispatch(fetchOneStundent(studentId || ""));
     }, []);
@@ -20,14 +22,23 @@ export const StudentPage: FC = () => {
 
     return (
         <div className="student-info">
+            <div className="header_section">
+                <h3 className="title">{t("student_info")}</h3>
+                {
+                    localStorage.getItem('role') === 'ADMIN' &&
+                    <Link className="button_link" type="primary" to={`/dashboard/students/${studentId}`}>
+                        {t("edit")}
+                        <EditFilled />
+                    </Link>
+                }
+            </div>
 
-            <h3 className="title">Grades</h3>
             <Row gutter={50} className="links"> {
                 isLoading ? <Col className="emprt_text">Loading...</Col> :
                     <>
-                        <Col xs={24} xl={8} md={10} xxl={5} className="student_image">
+                        <Col xs={24} xl={8} md={10} xxl={4} className="student_image">
                             <img src={
-                                result?.imagePath ? result?.imagePath :
+                                result?.imagePath ? `${ENDPOINT_BASE_URL}${result?.imagePath}` :
                                     result?.gender ? boy : girl
                             } alt="image of student" />
                         </Col>
@@ -55,7 +66,7 @@ export const StudentPage: FC = () => {
                             </div>
                         </Col>
                         <Col xs={24} md={24} className="files_section">
-                            <h4 className="files_title">Student achievements</h4>
+                            <h4 className="files_title">{t("student_achievments")}</h4>
                             {
                                 result?.files.length == 0 ? <div className="emprt_text">No achievements</div> :
                                     <ul className="files_list">
