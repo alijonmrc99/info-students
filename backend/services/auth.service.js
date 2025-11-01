@@ -45,6 +45,13 @@ export async function updateUser({ id, password, fullName, phone }) {
     });
     return user;
 }
+export async function getUserById({ id }) {
+    const user = await prisma.user.findUnique({
+        where: { id: Number(id) },
+        select: { id: true, email: true, fullName: true, phone: true, role: true, createdAt: true }
+    });
+    return user;
+}
 export async function updateUserById({ id, email, password, fullName, phone, role, teacherId }) {
 
     const payload = {};
@@ -71,9 +78,17 @@ export async function updateUserById({ id, email, password, fullName, phone, rol
 
 
 export function generateAccessToken(user) {
-    // user: { id, email, role, ... }
     const payload = { userId: user.id, role: user.role };
     return jwt.sign(payload, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRES });
+}
+
+
+export async function getUsers() {
+    const users = await prisma.user.findMany({});
+
+    return {
+        data: users
+    };
 }
 
 export async function loginUser({ email, password }) {

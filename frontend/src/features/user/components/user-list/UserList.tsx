@@ -38,12 +38,6 @@ export const UserList: FC<{
 
         },
         {
-            title: t('username'),
-            dataIndex: "username",
-            key: "username",
-
-        },
-        {
             title: t('email'),
             dataIndex: "email",
             key: "email",

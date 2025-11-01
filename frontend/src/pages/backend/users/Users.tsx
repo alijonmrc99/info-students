@@ -53,13 +53,13 @@ export const Users: FC = () => {
         {contexHolder}
 
         <Flex className='news-header' justify='space-between'>
-            <h3>{t('table_of_places')}</h3>
+            <h3>{t('users')}</h3>
             <div>
                 <Button type='primary' onClick={() => navigate('create')}>{t("add")}</Button>
             </div>
         </Flex>
 
-        <UserList list={result?.data || []}
+        <UserList list={result || []}
             isDeleting={isDeleting}
             isLoading={isLoading}
             onDelete={confirm} />

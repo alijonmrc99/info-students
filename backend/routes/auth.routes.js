@@ -1,14 +1,17 @@
 import express from 'express';
-import { register, login, refresh, logoutController, update, updateById } from '../controllers/auth.controller.js';
+import { register, login, refresh, logoutController, update, updateById, users, getById } from '../controllers/auth.controller.js';
 import authMiddleware from '../middleware/auth.middleware.js';
 import { isAdmin } from '../middleware/roles.middeware.js';
 
 const router = express.Router();
 
+router.get('/users', authMiddleware, isAdmin, users);
+router.post('/users', authMiddleware, isAdmin, register);
+router.put('/users/:id', authMiddleware, isAdmin, updateById);
+router.get('/users/:id', authMiddleware, isAdmin, getById);
+
 router.post('/login', login);
 router.post('/update', authMiddleware, update);
-router.post('/update/:id', authMiddleware, isAdmin, updateById);
-router.post('/register', authMiddleware, isAdmin, register);
 router.post('/refresh', authMiddleware, refresh);
 router.post('/logout', logoutController);
 

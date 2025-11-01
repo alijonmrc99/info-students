@@ -1,1 +1,0 @@
-export * from "./place_type.endpoints";

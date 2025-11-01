@@ -4,9 +4,10 @@ import { ID } from "../../../common/models";
 
 export interface IPeriod {
     id?: ID;
-    name: string;
-    nameEn: string;
-    nameUz: string;
+    title: string;
+    content: string;
+    imageId: ID;
+    gradeId: ID;
 }
 
 export interface IPlaceSend {

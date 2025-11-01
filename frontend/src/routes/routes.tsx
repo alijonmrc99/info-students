@@ -1,19 +1,13 @@
 import { IndexRouteObject, NonIndexRouteObject, RouteObject } from "react-router-dom";
 import { RoleTypeEnums } from "../common/constants/base.constants";
-import { ROUTE_BACKEND_HOME, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_PERIODS, ROUTE_STUDENTS, ROUTE_PRESERVATIONS, ROUTE_TYPE_PLACE, ROUTE_USERS } from "../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_USERS } from "../common/constants/route.constants";
 import { Home } from "../pages/frontend/home/Home";
 import { LoginForm } from "../features/auth/components/login-form";
 import { BaseLayout } from "../layouts";
 import { Backend } from "../pages/backend/dashboard";
 import { Students } from "../pages/backend/students/Students";
-import { Periods } from "../pages/backend/periods";
-import { PeriodsForm } from "../features/periods/components/periods-form";
-import { Preservations } from "../pages/backend/state-of- preservation/periods";
-import { PreservationForm } from "../features/state-of-preservation/components/preservation-form";
 import { Users } from "../pages/backend/users";
 import { UserForm } from "../features/user/components/user-form";
-import { PlaceTypes } from "../pages/backend/place-types/periods";
-import { PlaceTypesForm } from "../features/type-of-place/components/place-type-form";
 import { GreadesPage } from "../pages/frontend/grades";
 import { ClassesPage } from "../pages/frontend/classes";
 import { StudentsList, StudentPage } from "../pages/frontend/students-list";
@@ -81,22 +75,6 @@ export const routes = (): RouteObjectType[] => {
                     element: <StudentsForm />,
                 },
                 {
-                    path: `${ROUTE_PERIODS}`,
-                    element: <Periods />,
-                },
-                {
-                    path: `${ROUTE_PERIODS}/:id`,
-                    element: <PeriodsForm />,
-                },
-                {
-                    path: `${ROUTE_PRESERVATIONS}`,
-                    element: <Preservations />,
-                },
-                {
-                    path: `${ROUTE_PRESERVATIONS}/:id`,
-                    element: <PreservationForm />,
-                },
-                {
                     path: `${ROUTE_USERS}`,
                     element: <Users />,
                 },
@@ -108,18 +86,17 @@ export const routes = (): RouteObjectType[] => {
                     path: `${ROUTE_USERS}/:id`,
                     element: <UserForm />,
                 },
-
                 {
-                    path: `${ROUTE_TYPE_PLACE}`,
-                    element: <PlaceTypes />,
+                    path: `${ROUTE_POSTS}`,
+                    element: <UserForm />,
                 },
                 {
-                    path: `${ROUTE_TYPE_PLACE}/create`,
-                    element: <PlaceTypesForm />,
+                    path: `${ROUTE_POSTS}/create`,
+                    element: <UserForm />,
                 },
                 {
-                    path: `${ROUTE_TYPE_PLACE}/:id`,
-                    element: <PlaceTypesForm />,
+                    path: `${ROUTE_POSTS}/:id`,
+                    element: <UserForm />,
                 },
             ]
         }

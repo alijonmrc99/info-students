@@ -21,11 +21,9 @@ export const useUsers = () => {
     const dispatch = useAppDispatch()
     const defaultValues: any = {
         email: "",
-        username: "",
         fullName: "",
         password: "",
         role: "",
-        // Add other properties of IUser here
     }
 
     const [isLoading, setIsLoading] = useState(false);

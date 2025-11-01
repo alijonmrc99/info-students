@@ -2,12 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IUser } from '../models';
 import { fetchAllUser } from '../thunks';
-import { IPageable } from '../../../common/models';
 
 
 export interface InitialStatePropsPlaces {
     isLoading: boolean;
-    result: IPageable<IUser[]> | null;
+    result: IUser[] | null;
     error: any;
 }
 
@@ -32,10 +31,10 @@ export const usersSlice = createSlice({
             error: null,
         }));
 
-        builder.addCase(fetchAllUser.fulfilled, (state, { payload: { result } }) => ({
+        builder.addCase(fetchAllUser.fulfilled, (state, { payload: { data } }) => ({
             ...state,
             isLoading: false,
-            result: result,
+            result: data,
             error: null,
         }));
 

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUserResponse } from '../models';
+import { IUser } from '../models';
 import { fetchOneUser } from '../thunks';
 export interface InitialStateProps {
     isLoading: boolean;
-    result: IUserResponse | null;
+    result: IUser | null;
     error: any;
 }
 
@@ -31,7 +31,7 @@ export const userSlice = createSlice({
         builder.addCase(fetchOneUser.fulfilled, (state, { payload }) => ({
             ...state,
             isLoading: false,
-            result: payload.result,
+            result: payload,
             error: null,
         }));
 

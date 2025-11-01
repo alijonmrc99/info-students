@@ -10,12 +10,8 @@ export interface IUser {
     email: string;
     role: string;
 }
-export interface IUserResponse {
-    id?: ID;
-    fullName: string;
-    username: string;
-    password: string;
-    roles: { id: ID, name: string }[];
-    email: string;
+
+export interface IUsers {
+    data: IUser[];
 }
 

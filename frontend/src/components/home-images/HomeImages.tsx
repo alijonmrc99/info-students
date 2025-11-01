@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import image1 from '../../assets/images/image-1.png';
-import image2 from '../../assets/images/image-2.png';
-import image3 from '../../assets/images/image-3.png';
-import image4 from '../../assets/images/image-4.png';
-import image5 from '../../assets/images/image-5.png';
-import image6 from '../../assets/images/image-6.png';
-import image7 from '../../assets/images/image.png';
-import path from '../../assets/images/path.png';
+import image1 from '../../assets/images/image-1.jpg';
+import image2 from '../../assets/images/image-2.jpg';
+import image3 from '../../assets/images/image-3.jpg';
+import image4 from '../../assets/images/image-4.jpg';
+import image5 from '../../assets/images/image-5.jpg';
+import image6 from '../../assets/images/image-6.jpg';
+import image7 from '../../assets/images/image-7.jpg';
 import './styles.scss';
 
 import useMouseOppositeEffect from '../../common/hooks/useMouseOppositeEffect';
@@ -38,15 +37,6 @@ export const HomeImages: FC = () => {
             </div>
             <div className="home-image">
                 <img style={sytle3} src={image3} alt="home-image-4" />
-            </div>
-            <div className="home-image">
-                <img style={sytle} src={path} alt="home-image-4" />
-            </div>
-            <div className="home-image">
-                <img style={sytle3} src={path} alt="home-image-4" />
-            </div>
-            <div className="home-image">
-                <img style={sytle} src={path} alt="home-image-4" />
             </div>
 
         </div>

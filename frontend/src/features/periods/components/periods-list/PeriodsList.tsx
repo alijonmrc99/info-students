@@ -5,12 +5,12 @@ import { ColumnType } from "antd/es/table";
 import { Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { IPeriod } from "../../models";
-import { ROUTE_BACKEND_HOME, ROUTE_PERIODS } from "../../../../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_POSTS } from "../../../../common/constants/route.constants";
 import { DataTable } from "../../../../common/data-table";
 import './sytles.scss';
 
 
-export const PeriodsListBackend: FC<{
+export const PostListBackend: FC<{
     isLoading: boolean;
     list: IPeriod[];
     onDelete: (id: any) => void,
@@ -20,7 +20,7 @@ export const PeriodsListBackend: FC<{
     const navigate = useNavigate();
 
     const onSelectRow = (_index: any, value: any) => {
-        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_PERIODS}/${value.id}`)
+        navigate(`${ROUTE_BACKEND_HOME}/${ROUTE_POSTS}/${value.id}`)
     }
 
 
