@@ -5,7 +5,7 @@ import { IPaginationData, PaginationDataContext } from "../../common/contexts";
 import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppSelector } from "../../store";
 import { Menu } from "antd";
-import { ROUTE_STUDENTS, ROUTE_USERS } from "../../common/constants/route.constants";
+import { ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_USERS } from "../../common/constants/route.constants";
 
 export const MainMenuBackend: FC = () => {
     const { t } = useTranslation();
@@ -27,6 +27,12 @@ export const MainMenuBackend: FC = () => {
             key: ROUTE_USERS,
             icon: <UserOutlined />,
             label: t('users'),
+            roles: []
+        },
+        {
+            key: ROUTE_POSTS,
+            icon: <UserOutlined />,
+            label: t('posts'),
             roles: []
         },
 

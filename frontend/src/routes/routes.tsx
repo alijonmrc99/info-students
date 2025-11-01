@@ -12,6 +12,8 @@ import { GreadesPage } from "../pages/frontend/grades";
 import { ClassesPage } from "../pages/frontend/classes";
 import { StudentsList, StudentPage } from "../pages/frontend/students-list";
 import { StudentsForm } from "../features/students-list/components/students";
+import { Posts } from "../pages/backend/posts";
+import { PostForm } from "../features/periods/components/posts-form";
 
 
 export type RouteObjectType = IndexRouteObject |
@@ -88,15 +90,15 @@ export const routes = (): RouteObjectType[] => {
                 },
                 {
                     path: `${ROUTE_POSTS}`,
-                    element: <UserForm />,
+                    element: <Posts />,
                 },
                 {
                     path: `${ROUTE_POSTS}/create`,
-                    element: <UserForm />,
+                    element: <PostForm />,
                 },
                 {
                     path: `${ROUTE_POSTS}/:id`,
-                    element: <UserForm />,
+                    element: <PostForm />,
                 },
             ]
         }

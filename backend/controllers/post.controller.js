@@ -1,6 +1,6 @@
 // controllers/postController.js
 
-import { createPostSer, deletePostSer, getAllPost, getOnePost, updatePostSer } from "../services/posts.service";
+import { createPostSer, deletePostSer, getAllPost, getOnePost, updatePostSer } from "../services/posts.service.js";
 
 
 export async function createPost(req, res) {
@@ -8,7 +8,11 @@ export async function createPost(req, res) {
         const { title, content, imageId, gradeId } = req.body;
 
         const post = await createPostSer({ title, content, gradeId, imageId });
-        res.status(201).json(post);
+        if (post)
+            res.status(201).json({
+                message: "Ok",
+                success: true,
+            });
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -27,15 +31,7 @@ export async function getPost(req, res) {
 
 export async function updatePost(req, res) {
     try {
-        const { title, content } = req.body;
-        const imagePath = req.file ? req.file.path : undefined;
-
-        const post = await updatePostSer(Number(req.params.id), {
-            title,
-            content,
-            imagePath,
-        });
-
+        const post = await updatePostSer(Number(req.params.id), req.body);
         res.json(post);
     } catch (err) {
         res.status(400).json({ error: err.message });

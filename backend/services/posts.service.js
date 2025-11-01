@@ -1,10 +1,22 @@
 import prisma from '../prisma/client.js';
+import { deleteFile } from '../utils/delete.js';
 
 
-export const createPostSer = async ({ title, content, imagePath }) => {
-    return await prisma.posts.create({
-        data: { title, content, imagePath },
-    });
+export const createPostSer = async ({ title, content, imageId, gradeId }) => {
+
+    const payload = {
+        title,
+        content,
+    }
+
+    if (imageId) payload.image = { connect: { id: Number(imageId) } };
+    if (gradeId) payload.grade = { connect: { id: Number(gradeId) } };
+
+    console.log(payload);
+
+
+
+    return await prisma.posts.create({ data: payload });
 };
 
 export const getAllPost = async () => {
@@ -12,21 +24,33 @@ export const getAllPost = async () => {
 };
 
 export const getOnePost = async (id) => {
-    return await prisma.posts.findUnique({ where: { id } });
+    return await prisma.posts.findUnique({
+        where: { id },
+        include: { image: true }
+    });
 };
 
-export const updatePostSer = async (id, { title, content, imagePath }) => {
+export const updatePostSer = async (id, data) => {
+
+    const payload = {}
+    if (data.title) payload.title = data.title
+    if (data.content) payload.content = data.content
+
+    if (data.imageId) payload.image = { connect: { id: Number(data.imageId) } }
+    if (data.gradeId) payload.grade = { connect: { id: Number(data.gradeId) } }
+
     const old = await prisma.posts.findUnique({ where: { id } });
     if (!old) throw new Error("Post not found");
 
     // if new image, delete old image
-    if (imagePath && old.imagePath) {
-        deleteFile(old.imagePath);
+    if (data.imageId && old.imageId) {
+        deleteFile(old.imageId);
     }
+
 
     return await prisma.posts.update({
         where: { id },
-        data: { title, content, imagePath },
+        data: payload,
     });
 };
 
@@ -35,8 +59,8 @@ export const deletePostSer = async (id) => {
     if (!post) throw new Error("Post not found");
 
     // delete file from storage
-    if (post.imagePath) {
-        deleteFile(post.imagePath);
+    if (post.imageId) {
+        deleteFile(post.imageId);
     }
 
     // delete from DB

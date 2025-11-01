@@ -1,1 +1,1 @@
-export * from "./periods.constants";
+export * from "./post.constants";

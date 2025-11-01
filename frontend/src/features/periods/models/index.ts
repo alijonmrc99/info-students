@@ -1,1 +1,1 @@
-export * from './IPeriod';
+export * from './IPost';

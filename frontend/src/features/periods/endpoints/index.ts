@@ -1,1 +1,1 @@
-export * from "./period.endpoints";
+export * from "./post.endpoints";

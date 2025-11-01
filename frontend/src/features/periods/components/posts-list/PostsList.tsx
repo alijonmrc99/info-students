@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ColumnType } from "antd/es/table";
 import { Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import { IPeriod } from "../../models";
+import { IPost } from "../../models";
 import { ROUTE_BACKEND_HOME, ROUTE_POSTS } from "../../../../common/constants/route.constants";
 import { DataTable } from "../../../../common/data-table";
 import './sytles.scss';
@@ -12,7 +12,7 @@ import './sytles.scss';
 
 export const PostListBackend: FC<{
     isLoading: boolean;
-    list: IPeriod[];
+    list: IPost[];
     onDelete: (id: any) => void,
     isDeleting: boolean,
 }> = ({ isLoading, list, onDelete, isDeleting }) => {
@@ -32,9 +32,9 @@ export const PostListBackend: FC<{
             width: 100
         },
         {
-            title: t('name'),
-            dataIndex: "nameUz",
-            key: "nameUz",
+            title: t('title'),
+            dataIndex: "title",
+            key: "title",
 
         },
 

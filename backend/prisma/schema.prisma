@@ -54,7 +54,7 @@ model PostImages {
 model Posts {
   id        Int     @id @default(autoincrement())
   title     String
-  content String
+  content String @db.LongText
   gradeId Int
   grade   Grade     @relation(fields: [gradeId], references: [id])
 

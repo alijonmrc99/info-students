@@ -21,7 +21,7 @@ router.post("/image", authMiddleware, uploadStudentImage.single("imagePath"), (r
 });
 
 // upload single file, field name = "image"
-router.post("/post", authMiddleware, uploadPostFile.single("image"), postImage);
+router.post("/post", authMiddleware, uploadPostFile.single("imageId"), postImage);
 ``
 // upload multi file, field name = "files"
 router.post("/files", uploadStudentFile.multiple("files", 15), studentsFiles);

@@ -1,7 +1,7 @@
 import * as yup from 'yup';
-import { PLACE_NAME_EN, PLACE_NAME_UZ } from "../constants";
+import { POST_CONTENT, POST_TITLE } from "../constants";
 
 export const PeriodScheme = yup.object().shape({
-    [PLACE_NAME_UZ]: yup.string().required('error.message.required'),
-    [PLACE_NAME_EN]: yup.string().required('error.message.required')
+    [POST_TITLE]: yup.string().required('error.message.required'),
+    [POST_CONTENT]: yup.string().required('error.message.required')
 }); 

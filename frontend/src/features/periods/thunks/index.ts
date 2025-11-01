@@ -1,1 +1,1 @@
-export * from "./period.thunk"
+export * from "./post.thunk"

@@ -52,5 +52,11 @@
     "student_info": "O'quvchi haqida ma'lumotlar",
     "student_achievments": "O'quvchining yutuqlari va sertifikatlari",
     "edit": "Tahrirlash",
-    "students": "O'quvchilar"
+    "students": "O'quvchilar",
+    "posts": "Yangiliklar",
+    "post": "Post",
+    "poster_image": "Poster rasmi",
+    "choose_grade": "Sinfni tanlang",
+    "content": "Kontent",
+    "teacher_id": "O'qituchini tanlang"
 }

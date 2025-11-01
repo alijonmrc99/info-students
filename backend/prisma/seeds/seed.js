@@ -7,11 +7,11 @@ async function main() {
     const hashedPassword = await bcrypt.hash("Admin123", 10); // 10 = salt rounds
     // data Admin if not exists
     await prisma.User.upsert({
-        where: { email: 'alijonmrc@gmail.com' },
+        where: { email: 'alijonmrc99@gmail.com' },
         update: {},
         create: {
             role: 'ADMIN',
-            email: 'alijonmrc@gmail.com',
+            email: 'alijonmrc99@gmail.com',
             fullName: "Alijon Kuvondikov",
             password: hashedPassword
         },

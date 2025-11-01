@@ -18,10 +18,11 @@ interface ImageUploaderProps {
     setIsLoaded?: (value: any) => void;
     customStyle?: React.CSSProperties,
     value?: string | null;
+    type?: "post" | "profile"
     setValue: UseFormSetValue<any>
 }
 
-export const ImageUploader: React.FC<ImageUploaderProps> = ({ setIsLoaded, value, accept = "image/*", customStyle = { height: "40px" }, label, path, setValue, name }) => {
+export const ImageUploader: React.FC<ImageUploaderProps> = ({ setIsLoaded, type, value, accept = "image/*", customStyle = { height: "40px" }, label, path, setValue, name }) => {
 
     const [stateOfFile, setStateOfFile] = useState<boolean | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -39,9 +40,14 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ setIsLoaded, value
             if (result.success) {
                 setIsLoading(false)
                 messageApi.success({ content: t("upload_success") })
-                console.log("result", result.data);
 
-                setValue && setValue(name, result.data.imagePath,)
+                if (type === "post") {
+                    console.log(name, result.data.id);
+
+                    setValue(name, result.data.id)
+                } else {
+                    setValue(name, result.data.imagePath,)
+                }
                 setIsLoaded && setIsLoaded({ loaded: true, success: "success" })
                 setStateOfFile(true)
             }
@@ -56,7 +62,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ setIsLoaded, value
 
     return (
         <Fragment>
-            <p>{label}</p>
+            <p className="image_label">{label}</p>
 
             <div style={customStyle} className="image-wrapper">
 

@@ -1,3 +1,4 @@
+import { ID } from "../../../common/models";
 
 
 
@@ -9,6 +10,12 @@ export interface IMe {
     id: string;
     email?: string;
     role: IRole;
+    teacher: {
+        grades: {
+            id: ID,
+            name: string
+        }[]
+    }
 
 }
 

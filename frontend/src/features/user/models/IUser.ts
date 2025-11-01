@@ -9,6 +9,8 @@ export interface IUser {
     password: string;
     email: string;
     role: string;
+    phone: string,
+    teacherId?: string
 }
 
 export interface IUsers {

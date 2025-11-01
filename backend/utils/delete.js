@@ -6,6 +6,31 @@ import prisma from "../prisma/client.js"; // adjust path if needed
  * @param {number} fileId - ID of the file in DB (File table)
  * @returns {Promise<boolean>} - true if deleted, false if not found
  */
+
+export async function deleteFile(id, params) {
+    const fileId = Number(id);
+    const file = await prisma.postImages.findUnique({
+        where: { id: fileId },
+    });
+
+    if (!file) {
+        console.log("File record not found in DB");
+        return ({ error: "File not found" });
+    }
+
+    try {
+        fs.unlinkSync(file.path); // remove the file
+    } catch (err) {
+        console.warn("File not found in storage or already deleted:", file.path);
+        return ({ error: "Failed to delete file from storage" });
+
+    }
+
+    // 3. Delete DB record
+    await prisma.postImages.delete({
+        where: { id: fileId },
+    });
+}
 export async function deleteFileById(req, res) {
     const fileId = Number(req.params.id);
     // 1. Find file in DB

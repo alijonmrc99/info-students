@@ -1,2 +1,2 @@
-export * from "./periods.slice";
-export * from "./period.slice"
+export * from "./posts.slice";
+export * from "./post.slice"

@@ -1,8 +1,8 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { Button, Col, Divider, Row } from "antd";
-import { UNSAFE_useFogOFWarDiscovery, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { TextFieldController } from "../../../../components/input/text-filed-controller";
 import { USER_FULLNAME, USER_PASSWORD, USER_EMAIL } from '../../constants'
@@ -12,13 +12,15 @@ import './sytles.scss';
 import { fetchOneUser } from "../../thunks";
 import { SelectController } from "../../../../components/input/select-controller";
 import { userSlice } from "../../slices";
+import { httpApi } from "../../../../App";
 
 export const UserForm: FC<{ level?: number, parentId?: ID }> = () => {
-    const { contexHolder, control, setValue, isLoading, handleSendForm } = useUsers();
+    const { contexHolder, control, setValue, isLoading, watch, handleSendForm } = useUsers();
     const { t } = useTranslation();
     const { id } = useParams()
     const dispatch = useAppDispatch();
     const { result: user } = useAppSelector(state => state.user);
+    const [teacher, setTeacher] = useState<{ id: ID, fullName: string }[]>([])
     const role = [
         { value: "ADMIN", label: 'admin' },
         { value: "TEACHER", label: 'teacher' },
@@ -34,7 +36,12 @@ export const UserForm: FC<{ level?: number, parentId?: ID }> = () => {
         }
     }, [t])
 
-
+    useEffect(() => {
+        httpApi.get<[{ id: ID, fullName: string }]>('teachers', {}).then(res => {
+            setTeacher(res || [])
+        }).catch(err => console.log(err)
+        )
+    }, [])
 
     useEffect(() => {
         if (user) {
@@ -42,6 +49,8 @@ export const UserForm: FC<{ level?: number, parentId?: ID }> = () => {
             setValue('fullName', user.fullName)
             setValue('email', user.email)
             setValue('role', user.role)
+            setValue("phone", user.phone)
+            setValue("teacherId", user.teacherId)
         }
 
     }, [user, t])
@@ -70,6 +79,18 @@ export const UserForm: FC<{ level?: number, parentId?: ID }> = () => {
                         items={role}
                     />
                 </Col>
+                {
+                    watch('role') === "TEACHER" &&
+                    <Col xs={24} md={12}>
+                        <SelectController
+                            control={control}
+                            setValue={setValue}
+                            name="teacherId"
+                            label={t('teacher_id')}
+                            items={teacher.map(item => ({ value: item.id, label: item.fullName }))}
+                        />
+                    </Col>
+                }
             </Row>
 
             {contexHolder}

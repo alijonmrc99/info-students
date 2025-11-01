@@ -14,7 +14,7 @@ export async function postImage(req, res) {
 
         return res.status(201).json({
             success: true,
-            image
+            data: image
         });
     } catch (err) {
         console.error(err);

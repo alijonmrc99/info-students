@@ -1,41 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IPeriod } from '../models';
-import { fetchOnePeriod } from '../thunks';
-export interface InitialStateProps {
+
+import { IPost } from '../models';
+import { fetchAllPosts } from '../thunks';
+
+
+export interface InitialStatePropsPlaces {
     isLoading: boolean;
-    result: IPeriod | null;
+    result: IPost[] | null;
     error: any;
 }
 
-const initialState: InitialStateProps = {
+const initialState: InitialStatePropsPlaces = {
     isLoading: false,
     result: null,
     error: null,
 };
 
-export const periodSlice = createSlice({
-    name: 'period',
+export const postsSlice = createSlice({
+    name: 'posts',
     initialState,
     reducers: {
-        emptyState: (state) => ({ ...state, result: null })
+        emptyState: (state) => ({ ...state, result: null }),
     },
     extraReducers: (builder) => {
 
-        builder.addCase(fetchOnePeriod.pending, (state) => ({
+        builder.addCase(fetchAllPosts.pending, (state) => ({
             ...state,
             isLoading: true,
             result: null,
             error: null,
         }));
 
-        builder.addCase(fetchOnePeriod.fulfilled, (state, { payload }) => ({
+        builder.addCase(fetchAllPosts.fulfilled, (state, { payload }) => ({
             ...state,
             isLoading: false,
-            result: payload.result,
+            result: payload,
             error: null,
         }));
 
-        builder.addCase(fetchOnePeriod.rejected, (state, { payload }) => ({
+        builder.addCase(fetchAllPosts.rejected, (state, { payload }) => ({
             ...state,
             isLoading: false,
             result: null,
