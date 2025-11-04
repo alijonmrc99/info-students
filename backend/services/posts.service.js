@@ -12,16 +12,21 @@ export const createPostSer = async ({ title, content, imageId, gradeId }) => {
     if (imageId) payload.image = { connect: { id: Number(imageId) } };
     if (gradeId) payload.grade = { connect: { id: Number(gradeId) } };
 
-    console.log(payload);
-
-
 
     return await prisma.posts.create({ data: payload });
 };
 
-export const getAllPost = async () => {
-    return await prisma.posts.findMany();
+export const getAllPost = async ({ skip = 0, take = 50, }) => {
+    return await prisma.posts.findMany({
+        skip,
+        take,
+        include: { grade: true, image: true }
+    });
 };
+
+export async function countPosts() {
+    return prisma.posts.count({});
+}
 
 export const getOnePost = async (id) => {
     return await prisma.posts.findUnique({

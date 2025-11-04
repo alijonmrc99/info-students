@@ -1,1 +1,1 @@
-export * from './periods.schema';
+export * from './post.schema';

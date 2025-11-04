@@ -60,13 +60,13 @@ export const Students: FC = () => {
     //         })
     // }
 
-    const onChange = (data: any) => setPagination(data)
+    const onChange = (data: any) => {
+        setPagination(data)
+    }
 
     useEffect(() => {
         dispatch(fetchAllStudents({ ...pagination, ...filter }))
     }, [t, pagination, filter])
-
-
 
 
     return <div className='news-admin'>

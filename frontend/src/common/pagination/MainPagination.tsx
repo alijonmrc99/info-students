@@ -9,12 +9,13 @@ interface IPaginationProps {
     total?: number,
     perPage?: number,
     defaultCurrent?: number,
+    showCount?: boolean
 }
 
-export const defaultPaginationData = { page: 1, perPage: 30 };
+export const defaultPaginationData = { page: 1, perPage: 12 };
 
 export const MainPagination: FC<IPaginationProps> = ({ onChange, total = 1,
-    perPage = defaultPaginationData.perPage, defaultCurrent = 1, }) => {
+    perPage = defaultPaginationData.perPage, showCount: showSizeChanger, defaultCurrent = 1, }) => {
     useEffect(() => {
     }, [defaultCurrent])
     const { t } = useTranslation()
@@ -32,7 +33,7 @@ export const MainPagination: FC<IPaginationProps> = ({ onChange, total = 1,
             total={total || 0}
             showTotal={(total, range) => `${range[0]}-${range[1]} ${t('from')} ${total}`}
             pageSize={perPage}
-            showSizeChanger
+            showSizeChanger={showSizeChanger}
             defaultCurrent={defaultCurrent}
             onChange={(page, perPage) => onChange({ perPage: perPage, page: page })
             }

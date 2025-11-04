@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Button, Flex, Modal } from 'antd';
@@ -9,6 +9,8 @@ import { httpApi } from '../../../App';
 import { ENDPOINT_POSTS } from '../../../features/periods/endpoints';
 import { fetchAllPosts } from '../../../features/periods/thunks';
 import { PostListBackend } from '../../../features/periods/components/posts-list/PostsList';
+import { IPaginationData, PaginationDataContext } from '../../../common/contexts';
+import { MainPagination } from '../../../common/pagination';
 
 
 export const Posts: FC = () => {
@@ -18,7 +20,9 @@ export const Posts: FC = () => {
     const [isDeleting, setIsDeleting] = useState(false);
     const { result, isLoading } = useAppSelector(state => state.posts);
     const [modal, contexHolder] = Modal.useModal();
+    const { pagination, setPagination } = useContext(PaginationDataContext) as IPaginationData
 
+    const onChange = (data: any) => setPagination(data)
     const confirm = (id: string) => {
         modal.confirm({
             title: t('attention'),
@@ -35,7 +39,7 @@ export const Posts: FC = () => {
         setIsDeleting(true);
         httpApi.delete(`${ENDPOINT_POSTS}/${id}`, {})
             .then(() => {
-                dispatch(fetchAllPosts({}))
+                dispatch(fetchAllPosts({ ...pagination }))
             })
             .finally(() => {
                 setIsDeleting(false)
@@ -43,8 +47,8 @@ export const Posts: FC = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchAllPosts({}))
-    }, [t,])
+        dispatch(fetchAllPosts({ ...pagination }))
+    }, [t, pagination])
 
     return <div className='news-admin'>
         {contexHolder}
@@ -55,8 +59,15 @@ export const Posts: FC = () => {
                 <Button type='primary' onClick={() => navigate('create')}>{t("add")}</Button>
             </div>
         </Flex>
-
-        <PostListBackend list={result || []}
+        <Flex justify='end'>
+            <MainPagination
+                onChange={onChange}
+                total={result?.meta.total || 0}
+                perPage={pagination.perPage}
+                defaultCurrent={pagination.page}
+            />
+        </Flex>
+        <PostListBackend list={result?.data || []}
             isDeleting={isDeleting}
             isLoading={isLoading}
             onDelete={confirm} />

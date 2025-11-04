@@ -3,10 +3,13 @@ import * as studentService from '../services/students.service.js';
 
 export async function listStudents(req, res) {
     try {
-        const { page, perPage, gradeId, classId } = req.query;
+        let { page, perPage, gradeId, classId } = req.query;
         // adjust for 0-based index
+        if (page == 0) {
+            page = 1
+        }
 
-        const students = await studentService.listStudents({ skip: Number(perPage * (page)) || 0, take: Number(perPage) || 50, gradeId, classId });
+        const students = await studentService.listStudents({ skip: Number(perPage * (page - 1)) || 0, take: Number(perPage) || 50, gradeId, classId });
         // get total count matching filters (requires studentService.countStudents)
         const total = await studentService.countStudents();
 

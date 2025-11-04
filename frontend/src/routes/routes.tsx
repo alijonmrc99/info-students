@@ -14,6 +14,7 @@ import { StudentsList, StudentPage } from "../pages/frontend/students-list";
 import { StudentsForm } from "../features/students-list/components/students";
 import { Posts } from "../pages/backend/posts";
 import { PostForm } from "../features/periods/components/posts-form";
+import { PostPage } from "../pages/frontend/posts";
 
 
 export type RouteObjectType = IndexRouteObject |
@@ -47,7 +48,15 @@ export const routes = (): RouteObjectType[] => {
                     path: `${ROUTE_GRADES}/:gradeId/:classId/:studentId`,
                     element: <StudentPage />,
                 },
+                {
+                    path: ROUTE_POSTS,
+                    element: <PostPage />,
 
+                },
+                {
+                    path: `${ROUTE_GRADES}/:id`,
+                    element: <ClassesPage />,
+                },
 
 
 

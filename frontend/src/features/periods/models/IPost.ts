@@ -7,8 +7,18 @@ export interface IPost {
     title: string;
     content: string;
     imageId: ID;
-    gradeId: ID;
+    gradeId: number;
     image: {
         path: string
+    }
+}
+
+export interface IPosts {
+    data: IPost[],
+    meta: {
+        total: number,
+        currentPage: number
+        perPage: number,
+        totalPages: number
     }
 }

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ENDPOINT_POSTS } from '../endpoints';
-import { IPost } from '../models';
+import { IPost, IPosts } from '../models';
 import { httpApi } from '../../../App';
 import { ID } from '../../../common/models';
 
@@ -9,7 +9,7 @@ import { ID } from '../../../common/models';
 
 export const fetchAllPosts = createAsyncThunk('post/getAll', async (params: any, { rejectWithValue }) => {
     try {
-        return await httpApi.get<IPost[]>(ENDPOINT_POSTS, { params }).then((response) => response);
+        return await httpApi.get<IPosts>(ENDPOINT_POSTS, params).then((response) => response);
     } catch (error) {
         return rejectWithValue(error);
     }

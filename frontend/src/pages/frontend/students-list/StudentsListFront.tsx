@@ -7,7 +7,7 @@ import { fetchAllStudents } from "../../../features/students-list/thunks";
 export const StudentsList: FC = () => {
     const dispatch = useAppDispatch();
 
-    const { result, isLoading } = useAppSelector(state => state.places);
+    const { result, isLoading } = useAppSelector(state => state.students);
     const { gradeId, classId } = useParams();
     if (gradeId) {
         const grade = Number(gradeId) - 4

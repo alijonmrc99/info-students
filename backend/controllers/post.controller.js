@@ -1,6 +1,6 @@
 // controllers/postController.js
 
-import { createPostSer, deletePostSer, getAllPost, getOnePost, updatePostSer } from "../services/posts.service.js";
+import { countPosts, createPostSer, deletePostSer, getAllPost, getOnePost, updatePostSer } from "../services/posts.service.js";
 
 
 export async function createPost(req, res) {
@@ -19,8 +19,27 @@ export async function createPost(req, res) {
 }
 
 export async function getPosts(req, res) {
-    const posts = await getAllPost();
-    res.json(posts);
+    let { page, perPage } = req.query;
+
+    if (Number(page) == 0) {
+        page = 1
+    }
+    console.log(Number(page) == 0);
+
+
+    const posts = await getAllPost({ skip: Number(perPage * (page - 1)) || 0, take: Number(perPage) || 50, });
+    const total = await countPosts();
+
+    const response = {
+        data: posts,
+        meta: {
+            total,
+            currentPage: Math.floor((Number(perPage * (page)) || 0) / (Number(perPage) || 50)) + 1,
+            perPage: Number(perPage) || 50,
+            totalPages: Math.ceil(total / (Number(perPage) || 50))
+        }
+    }
+    res.json(response);
 }
 
 export async function getPost(req, res) {

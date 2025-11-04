@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IPost } from '../models';
+import { IPosts } from '../models';
 import { fetchAllPosts } from '../thunks';
 
 
 export interface InitialStatePropsPlaces {
     isLoading: boolean;
-    result: IPost[] | null;
+    result: IPosts | null;
     error: any;
 }
 

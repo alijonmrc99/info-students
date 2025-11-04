@@ -16,7 +16,7 @@ import { ImageUploader } from "../../../../components/input/file-uploader/ImageU
 import { SelectController } from "../../../../components/input/select-controller";
 
 export const PostForm: FC<{ level?: number, parentId?: ID }> = () => {
-    const { contexHolder, control, setValue, isLoading, watch, handleSendForm } = usePost();
+    const { contexHolder, control, setValue, isLoading, handleSendForm } = usePost();
     const { t } = useTranslation();
     const { id } = useParams()
     const dispatch = useAppDispatch();
@@ -39,8 +39,6 @@ export const PostForm: FC<{ level?: number, parentId?: ID }> = () => {
             // dispatch(fetchMe())
         }
     }, [t])
-
-    console.log(watch('imageId'));
 
 
     useEffect(() => {

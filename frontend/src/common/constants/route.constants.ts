@@ -4,6 +4,7 @@ export const ROUTE_ABOUT = "/about";
 export const ROUTE_GRADES = "/grades";
 export const ROUTE_CLASSES = "/classes";
 
+
 // Backend routes
 export const ROUTE_LOGIN = "/login";
 export const ROUTE_BACKEND_HOME = "/dashboard";
