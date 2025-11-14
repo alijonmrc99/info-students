@@ -17,12 +17,42 @@ async function main() {
         },
     })
     await prisma.User.upsert({
-        where: { email: 'teacher@gmail.com' },
+        where: { email: 'teacher1@gmail.com' },
         update: {},
         create: {
             role: 'TEACHER',
-            email: 'teacher@gmail.com',
-            fullName: "Teacher Kuvondikov",
+            email: 'teacher1@gmail.com',
+            fullName: "Teacher Teacher",
+            password: hashedPassword
+        },
+    })
+    await prisma.User.upsert({
+        where: { email: 'teacher2@gmail.com' },
+        update: {},
+        create: {
+            role: 'TEACHER',
+            email: 'teacher2@gmail.com',
+            fullName: "Teacher Teacher",
+            password: hashedPassword
+        },
+    })
+    await prisma.User.upsert({
+        where: { email: 'teacher3@gmail.com' },
+        update: {},
+        create: {
+            role: 'TEACHER',
+            email: 'teacher3@gmail.com',
+            fullName: "Teacher Teacher",
+            password: hashedPassword
+        },
+    })
+    await prisma.User.upsert({
+        where: { email: 'teacher4@gmail.com' },
+        update: {},
+        create: {
+            role: 'TEACHER',
+            email: 'teacher4@gmail.com',
+            fullName: "Teacher Teacher",
             password: hashedPassword
         },
     })
