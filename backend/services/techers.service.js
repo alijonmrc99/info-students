@@ -55,7 +55,6 @@ export async function createTeacher(data) {
 
 export async function updateTeacher(id, data) {
     const payload = {};
-    console.log(data);
 
     if (data.fullName !== undefined) payload.fullName = data.fullName;
     if (data.email !== undefined) payload.email = data.email;

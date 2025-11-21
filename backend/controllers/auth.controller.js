@@ -63,7 +63,7 @@ export async function getById(req, res) {
 export async function deleteById(req, res) {
     try {
         const { id } = req.params
-        if (id === "1" || id === "2") {
+        if (id === "1") {
             return res.status(400).json({ error: "This user is protected and cannot be deleted." });
         }
         const user = await deketeUserById({ id });

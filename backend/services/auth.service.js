@@ -68,6 +68,9 @@ export async function updateUserById({ id, email, password, fullName, phone, rol
     if (fullName !== undefined) payload.fullName = fullName;
     if (phone !== undefined) payload.phone = phone;
     if (role !== undefined) payload.role = role;
+    if (teacherId === undefined) {
+        payload.teacherId = null;
+    }
     if (email !== undefined) payload.email = email;
     if (teacherId !== undefined) payload.teacherId = teacherId;
 
