@@ -47,8 +47,7 @@ export const Backend: FC = withAuthorized(() => {
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical" >
                     <img className='logo-image' src={logo} alt="logo" />
-                    <h2 style={{ display: `${collapsed ? "none" : "block"}` }} className='site-name'>O’zbekiston arxeologik <br />
-                        yodgorliklar xaritasi</h2>
+                    <h2 style={{ display: `${collapsed ? "none" : "block"}` }} className='site-name'>Samarqand shahridagi <br /> Prezident maktabi</h2>
                 </div>
                 <MainMenuBackend />
             </Sider>
