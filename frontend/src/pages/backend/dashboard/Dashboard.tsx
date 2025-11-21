@@ -18,6 +18,8 @@ import { Notifacation } from '../../../common/notification';
 import { Language } from '../../../components/language';
 import { MainMenuBackend } from '../../../components/backend-menu';
 import { ROUTE_LOGIN } from '../../../common/constants/route.constants';
+import { useAppDispatch } from '../../../store';
+import { meSlice } from '../../../features/auth/slices';
 
 const { Header, Sider, Content } = Layout;
 
@@ -25,6 +27,7 @@ export const Backend: FC = withAuthorized(() => {
     const [collapsed, setCollapsed] = useState(false);
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const items: MenuProps['items'] = [
         {
             label: < div ><LogoutOutlined /> {t('exit')}</div>,
@@ -33,8 +36,10 @@ export const Backend: FC = withAuthorized(() => {
     ];
     const onClick: MenuProps['onClick'] = ({ key }) => {
         if (key === "exit") {
+            dispatch(meSlice.actions.emptyState())
             clearBearerToken();
             navigate(ROUTE_LOGIN);
+
         }
     }
     return (
