@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent, Fragment, useRef } from "react";
 
 import { UseFormSetValue } from "react-hook-form";
-import { CheckCircleFilled, CheckCircleOutlined, ExclamationCircleOutlined, FileExclamationFilled, UploadOutlined } from '@ant-design/icons'
+import { CheckCircleFilled, FileExclamationFilled, UploadOutlined } from '@ant-design/icons'
 
 
 import './styles.scss'
 import { uploadFile } from "../../../common/functions";
-import { message, Row, Spin } from "antd";
+import { message, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 import { ENDPOINT_BASE_URL } from "../../../common/constants/endpoind.constants";
 

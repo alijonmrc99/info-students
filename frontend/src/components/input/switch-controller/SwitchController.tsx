@@ -20,7 +20,7 @@ export const SwitchController: FC<SwitchControllerProps> = ({
     <Controller
       control={control}
       name={name}
-      render={({ field: { value, ...fieldProps } }) => {
+      render={({ field: { value } }) => {
         const onChange = (checked: boolean) => {
           setValue(name, checked)
         }

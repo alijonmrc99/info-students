@@ -52,6 +52,12 @@ export async function getUserById({ id }) {
     });
     return user;
 }
+export async function deketeUserById({ id }) {
+    const user = await prisma.user.delete({
+        where: { id: Number(id) },
+    });
+    return user;
+}
 export async function updateUserById({ id, email, password, fullName, phone, role, teacherId }) {
 
     const payload = {};

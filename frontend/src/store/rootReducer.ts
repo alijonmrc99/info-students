@@ -4,6 +4,7 @@ import { meSlice } from "../features/auth/slices";
 import { postSlice, postsSlice } from "../features/periods/slices";
 import { userSlice, usersSlice } from "../features/user/slices";
 import { studentSlice, studentsSlice } from "../features/students-list/slices";
+import { teacherSlice, teachersSlice } from "../features/teachers/slices";
 
 export const rootReducer = combineReducers({
     me: meSlice.reducer,
@@ -14,4 +15,6 @@ export const rootReducer = combineReducers({
     users: usersSlice.reducer,
     students: studentsSlice.reducer,
     student: studentSlice.reducer,
+    teachers: teachersSlice.reducer,
+    teacher: teacherSlice.reducer,
 })

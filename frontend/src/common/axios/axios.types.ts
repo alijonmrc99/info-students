@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosRequestConfig, AxiosStatic } from "axios"
 
 export type AxiosConfig = {
-    pathParams: { [key: string]: string }
+    pathParams?: { [key: string]: string }
     formData?: boolean
 } & AxiosRequestConfig;
 

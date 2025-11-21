@@ -8,5 +8,6 @@ export default defineConfig({
     'host': true,
     'port': 3035,
     open: true
-  }
+  },
+
 })

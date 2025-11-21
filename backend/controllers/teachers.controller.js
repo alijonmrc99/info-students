@@ -20,6 +20,16 @@ export async function getTeacher(req, res) {
         return res.status(500).json({ error: 'Failed to fetch teacher' });
     }
 }
+export async function getGrades(req, res) {
+    try {
+        const grades = await hrService.getAllGrades();
+        if (!grades) return res.status(404).json({ error: 'Grades not found' });
+        return res.json(grades);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Failed to fetch Grades' });
+    }
+}
 
 export async function createTeacher(req, res) {
     try {

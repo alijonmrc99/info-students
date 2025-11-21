@@ -22,6 +22,12 @@ export async function getTeacherById(id) {
         }
     });
 }
+export async function getAllGrades() {
+    return prisma.grade.findMany({
+        where: {},
+
+    });
+}
 
 export async function createTeacher(data) {
     // Require classId or className to assign the teacher to a class

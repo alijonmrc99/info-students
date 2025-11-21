@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { Button, Col, Divider, message, Row } from "antd";
+import { Button, Col, Divider, Row } from "antd";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { fetchOneStundent } from "../../thunks";

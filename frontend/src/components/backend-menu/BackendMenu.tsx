@@ -2,16 +2,19 @@ import { FC, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IPaginationData, PaginationDataContext } from "../../common/contexts";
-import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
+import { KeyOutlined, PaperClipOutlined, ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { useAppSelector } from "../../store";
 import { Menu } from "antd";
-import { ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_USERS } from "../../common/constants/route.constants";
+import { ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_TEACHERS, ROUTE_USERS } from "../../common/constants/route.constants";
 
 export const MainMenuBackend: FC = () => {
     const { t } = useTranslation();
 
     const { pathname } = useLocation();
     const { result: user } = useAppSelector(state => state.me)
+
+
+
     const { setPagination } = useContext(PaginationDataContext) as IPaginationData;
     const navigate = useNavigate();
     const items = useMemo(() => [
@@ -20,20 +23,26 @@ export const MainMenuBackend: FC = () => {
             key: ROUTE_STUDENTS,
             icon: <ProfileOutlined />,
             label: t('students'),
-            roles: []
+            role: ['ADMIN']
         },
 
         {
             key: ROUTE_USERS,
             icon: <UserOutlined />,
             label: t('users'),
-            roles: []
+            role: ['ADMIN']
         },
         {
             key: ROUTE_POSTS,
-            icon: <UserOutlined />,
+            icon: <PaperClipOutlined />,
             label: t('posts'),
-            roles: []
+            role: ['ADMIN', "TEACHER"]
+        },
+        {
+            key: ROUTE_TEACHERS,
+            icon: <KeyOutlined />,
+            label: t('teachers'),
+            role: ['ADMIN',]
         },
 
     ], [t]);
@@ -44,20 +53,17 @@ export const MainMenuBackend: FC = () => {
 
 
         setMenuItems(items?.filter(item => {
-            if (!item.roles?.length) {
-                return true;
-            } else {
-                // return user?.permissions
-                //     .map((role) => role.permission)
-                //     .some((role) => item.roles?.includes(role));
-                return []
-            }
+            return item.role.includes(String(localStorage?.role));
+
         }))
     };
 
     useEffect(() => {
         filterMenu()
-    }, [user, t]);
+    }, [user, t, localStorage.getItem('role')]);
+
+
+
 
     const onSelect = (selectedMenu: {
         key: string;

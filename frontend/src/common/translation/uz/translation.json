@@ -58,5 +58,8 @@
     "poster_image": "Poster rasmi",
     "choose_grade": "Sinfni tanlang",
     "content": "Kontent",
-    "teacher_id": "O'qituchini tanlang"
+    "teacher_id": "O'qituchini tanlang",
+    "teachers": "O'qituvchilar",
+    "tracher": "O'qituvchi",
+    "select_grade": "Sinfni tanlang"
 }

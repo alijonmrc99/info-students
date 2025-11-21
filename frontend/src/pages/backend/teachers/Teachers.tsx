@@ -6,17 +6,17 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { httpApi } from '../../../App';
-import { ENDPOINT_POSTS } from '../../../features/periods/endpoints';
-import { fetchAllPosts } from '../../../features/periods/thunks';
-import { PostListBackend } from '../../../features/periods/components/posts-list/PostsList';
+import { TeacherList } from '../../../features/teachers/components/teacher-list/TeacherList';
+import { fetchAllTeachers } from '../../../features/teachers/thunks';
+import { ENDPOINT_TEACHER } from '../../../features/teachers/endpoints';
 
 
-export const Periods: FC = () => {
+export const Teachers: FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [isDeleting, setIsDeleting] = useState(false);
-    const { result, isLoading } = useAppSelector(state => state.periods);
+    const { result, isLoading } = useAppSelector(state => state.teachers);
     const [modal, contexHolder] = Modal.useModal();
 
     const confirm = (id: string) => {
@@ -33,9 +33,9 @@ export const Periods: FC = () => {
 
     const onDelete = (id: string,) => {
         setIsDeleting(true);
-        httpApi.delete(`${ENDPOINT_POSTS}/${id}`, {})
+        httpApi.delete(`${ENDPOINT_TEACHER}/${id}`, {})
             .then(() => {
-                dispatch(fetchAllPosts({}))
+                dispatch(fetchAllTeachers({}))
             })
             .finally(() => {
                 setIsDeleting(false)
@@ -45,7 +45,7 @@ export const Periods: FC = () => {
 
 
     useEffect(() => {
-        dispatch(fetchAllPosts({}))
+        dispatch(fetchAllTeachers({}))
     }, [t,])
 
 
@@ -53,13 +53,13 @@ export const Periods: FC = () => {
         {contexHolder}
 
         <Flex className='news-header' justify='space-between'>
-            <h3>{t('table_of_places')}</h3>
+            <h3>{t('teachers')}</h3>
             <div>
                 <Button type='primary' onClick={() => navigate('create')}>{t("add")}</Button>
             </div>
         </Flex>
 
-        <PostListBackend list={result || []}
+        <TeacherList list={result || []}
             isDeleting={isDeleting}
             isLoading={isLoading}
             onDelete={confirm} />

@@ -16,46 +16,7 @@ async function main() {
             password: hashedPassword
         },
     })
-    await prisma.User.upsert({
-        where: { email: 'teacher1@gmail.com' },
-        update: {},
-        create: {
-            role: 'TEACHER',
-            email: 'teacher1@gmail.com',
-            fullName: "Teacher Teacher",
-            password: hashedPassword
-        },
-    })
-    await prisma.User.upsert({
-        where: { email: 'teacher2@gmail.com' },
-        update: {},
-        create: {
-            role: 'TEACHER',
-            email: 'teacher2@gmail.com',
-            fullName: "Teacher Teacher",
-            password: hashedPassword
-        },
-    })
-    await prisma.User.upsert({
-        where: { email: 'teacher3@gmail.com' },
-        update: {},
-        create: {
-            role: 'TEACHER',
-            email: 'teacher3@gmail.com',
-            fullName: "Teacher Teacher",
-            password: hashedPassword
-        },
-    })
-    await prisma.User.upsert({
-        where: { email: 'teacher4@gmail.com' },
-        update: {},
-        create: {
-            role: 'TEACHER',
-            email: 'teacher4@gmail.com',
-            fullName: "Teacher Teacher",
-            password: hashedPassword
-        },
-    })
+
 
     const classGreen = await prisma.class.create({
         data: {
@@ -1073,27 +1034,420 @@ async function main() {
                 classId: classGreen.id,
                 gradeId: grade9.id,
             },
+            {
+                fullName: "Abdug'affarov Shaxriddin Ulug'bek o'g'li",
+                birthDate: new Date("2009-05-15"),
+                phone: "88 910-91-31",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Abduvasiyev Sardor Jahongir o'g'li",
+                birthDate: new Date("2009-04-16"),
+                phone: "97 917-07-44",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Baxodirova Nilufar Dilshodovna",
+                birthDate: new Date("2010-05-20"),
+                phone: "97 917-16-86",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Baxritdinov Javoxir Yakub o'g'li",
+                birthDate: new Date("2009-11-16"),
+                phone: "90 603-55-27",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Hasanov Javohir Sherzod o'g'li",
+                birthDate: new Date("2009-06-13"),
+                phone: "97 921-09-77",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Mamasoliyev I'nomjon Zafar o'g'li",
+                birthDate: new Date("2009-04-11"),
+                phone: "93 342-00-62",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Mamasoliyeva Dilnura Azimjonovna",
+                birthDate: new Date("2009-11-10"),
+                phone: "33-748-53-42",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Mannonov Baxodirxon Akmalxon o'g'li",
+                birthDate: new Date("2009-02-03"),
+                phone: "91 554-15-40",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Pulatov Anis Bexzodovich",
+                birthDate: new Date("2009-12-30"),
+                phone: "91 528-70-00",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Toshmurodov Yusufbek Bektosh o'g'li",
+                birthDate: new Date("2009-06-15"),
+                phone: "93 239-76-59",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Uktamov Javohir Sherzod o'g'li",
+                birthDate: new Date("2009-09-24"),
+                phone: "99 342-78-33",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Xujamurodov Zohirshoh Davronovich",
+                birthDate: new Date("2009-02-05"),
+                phone: "998935082490",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Rasulov Shoxijahon Sherbek o'g'li",
+                birthDate: new Date("2009-10-31"),
+                phone: "998992860408",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Shayxidinov Shexroz Sharofidin o'g'li",
+                birthDate: new Date("2009-10-07"),
+                phone: "998901008288",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Xujayarov Diyorbek Baxtiyor o'g'li",
+                birthDate: new Date("2009-04-10"),
+                phone: "998915303785",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Ziyovadinov Xurshedjon Jamshedovich",
+                birthDate: new Date("2009-04-15"),
+                phone: "998997780020",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Axrorov Temur Sherzod o'g'li",
+                birthDate: new Date("2009-11-21"),
+                phone: "998973977372",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Norxujayev Komilxon Xurshid o'g'li",
+                birthDate: new Date("2009-12-05"),
+                phone: "998944342030",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Abdullayev Lazizbek Akbar o'g'li",
+                birthDate: new Date("2009-10-10"),
+                phone: "998906575516",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Saydullayev Shaxriyor Shuxrat o'g'li",
+                birthDate: new Date("2009-09-19"),
+                phone: "998940581819",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Jo'raqulova Davlatoy Bahodir qizi",
+                birthDate: new Date("2009-04-09"),
+                phone: "998973995850",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Baratov Baxtiyor Elyorjonovich",
+                birthDate: new Date("2009-06-30"),
+                phone: "998933470476",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Baxadirova Durdona Obidjonovna",
+                birthDate: new Date("2010-01-09"),
+                phone: "998915591489",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Artikova Zebo Abdusamat qizi",
+                birthDate: new Date("2009-03-22"),
+                phone: "998917027198",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade10.id
+            },
+            {
+                fullName: "Toshxo'jayev Nurislom Maqsud o`g`li",
+                birthDate: new Date("2008-12-10"),
+                phone: "998942413366",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Gulomov Diyor G`ayratovich",
+                birthDate: new Date("2008-09-19"),
+                phone: "998979220655",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Maxmudjonov Abdulfazl Erkinovich",
+                birthDate: new Date("2008-05-03"),
+                phone: "998997025130",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Kurozboyev Og`abek Doniyor o`g`li",
+                birthDate: new Date("2008-04-28"),
+                phone: "998973908782",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Zokirov Islom Azizjonovich",
+                birthDate: new Date("2008-07-29"),
+                phone: "998997553788",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Olimov Abdusaid Qobiljon o`g`li",
+                birthDate: new Date("2008-04-22"),
+                phone: "998997332355",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Toshpulatov Bexruz Dilshod o`g`li",
+                birthDate: new Date("2009-04-25"),
+                phone: "998889237090",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Maxmudov Asilbek Ne`matilla o`g`li",
+                birthDate: new Date("2009-02-13"),
+                phone: "998973955355",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Baxramov Baxodir Azim o`g`li",
+                birthDate: new Date("2008-11-03"),
+                phone: "998955572422",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Egamberdiyev Shohruz Feruzovich",
+                birthDate: new Date("2008-03-14"),
+                phone: "998971225552",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Gafurova Sayyora Ikrom qizi",
+                birthDate: new Date("2008-06-02"),
+                phone: "998917001412",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Mannonov Zafar Ulug`bekovich",
+                birthDate: new Date("2009-02-14"),
+                phone: "998906035529",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Umarov Sharofiddin Kaxramonovich",
+                birthDate: new Date("2008-06-14"),
+                phone: "998933537101",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Toshturdiyev Ulug`bek Eldor o`g`li",
+                birthDate: new Date("2008-09-29"),
+                phone: "998979262184",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Muxiddinov Sarvarbek Olmos o`g`li",
+                birthDate: new Date("2008-07-31"),
+                phone: "998932207121",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Sultanov Sobirjon Djamshedovich",
+                birthDate: new Date("2008-06-03"),
+                phone: "998973903345",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Pardaev Mirjalol Sherzod o`g`li",
+                birthDate: new Date("2008-06-25"),
+                phone: "998996064311",
+                gender: false,
+                classId: classGreen.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Mamatillayeva Sarvinoz Shodiyor qizi",
+                birthDate: new Date("2008-09-08"),
+                phone: "998978930081",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Norbayev Kattabek Shuhrat o`g`li",
+                birthDate: new Date("2009-08-24"),
+                phone: "998995265280",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Ismagilov Daniel Nailyevich",
+                birthDate: new Date("2008-02-10"),
+                phone: "998933412445",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Ro'zimurodov Ikromjon Baxtiyor o`g`li",
+                birthDate: new Date("2008-03-19"),
+                phone: "998942575705",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Xo'jaqulov Bexro`z Azizjon o`g`li",
+                birthDate: new Date("2008-08-12"),
+                phone: "998906032238",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            },
+            {
+                fullName: "Sag`dullayev Anvar Samariddin o`g`li",
+                birthDate: new Date("2008-03-01"),
+                phone: "998944861711",
+                gender: true,
+                classId: classBlue.id,
+                gradeId: grade11.id
+            }
+
 
 
         ]
     })
 
+
     await prisma.homeRoomTeacher.upsert({
-        where: { email: "fasdfaasad@gmail.com" },
+        where: { email: "teacher2@samps.uz" },
         update: {},
         create: {
-            fullName: "Karimboyev Elchinbek",
-            email: "fasdfaasad@gmail.com",
+            fullName: "Teacher Teacher",
+            email: "teacher2@samps.uz",
             phone: "123456789",
-            phone: "98955985"
+            phone: "98955985",
         }
     })
+    await prisma.homeRoomTeacher.upsert({
+        where: { email: "teacher3@samps.uz" },
+        update: {},
+        create: {
+            fullName: "Teacher Teacher",
+            email: "teacher3@samps.uz",
+            phone: "123456789",
+            phone: "98955985",
+        }
+    })
+    await prisma.homeRoomTeacher.upsert({
+        where: { email: "teacher4@samps.uz" },
+        update: {},
+        create: {
+            fullName: "Teacher Teacher",
+            email: "teacher4@samps.uz",
+            phone: "123456789",
+            phone: "98955985",
 
-
-
-
-
-
+        }
+    })
 
 }
 

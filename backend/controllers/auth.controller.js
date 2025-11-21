@@ -1,4 +1,4 @@
-import { registerUser, loginUser, refreshAccessToken, logout, updateUser, updateUserById, getUsers, getUserById } from '../services/auth.service.js';
+import { registerUser, loginUser, refreshAccessToken, logout, updateUser, updateUserById, getUsers, getUserById, deketeUserById } from '../services/auth.service.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -38,7 +38,7 @@ export async function updateById(req, res) {
         const { password, fullName, phone, email, teacherId, role } = req.body;
         const { id } = req.params
 
-        if (email === "alijonmrc99@gmail.com" || email === "alijonmrc99@gmail.com") {
+        if (email === "alijonmrc99@gmail.com" || email === "alijonmrc99@gmail.com", id === "1") {
             return res.status(400).json({ error: "This email is protected and cannot be changed." });
         }
 
@@ -55,6 +55,22 @@ export async function getById(req, res) {
 
         const user = await getUserById({ id });
         return res.status(201).json(user);
+    } catch (err) {
+        return res.status(400).json({ error: err.message });
+    }
+}
+
+export async function deleteById(req, res) {
+    try {
+        const { id } = req.params
+        if (id === "1" || id === "2") {
+            return res.status(400).json({ error: "This user is protected and cannot be deleted." });
+        }
+        const user = await deketeUserById({ id });
+        return res.status(200).json({
+            status: 'success',
+            message: 'User deleted successfully',
+        });
     } catch (err) {
         return res.status(400).json({ error: err.message });
     }

@@ -1,6 +1,6 @@
 import { IndexRouteObject, NonIndexRouteObject, RouteObject } from "react-router-dom";
 import { RoleTypeEnums } from "../common/constants/base.constants";
-import { ROUTE_BACKEND_HOME, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_USERS } from "../common/constants/route.constants";
+import { ROUTE_BACKEND_HOME, ROUTE_GRADES, ROUTE_HOME, ROUTE_LOGIN, ROUTE_POSTS, ROUTE_STUDENTS, ROUTE_TEACHERS, ROUTE_USERS } from "../common/constants/route.constants";
 import { Home } from "../pages/frontend/home/Home";
 import { LoginForm } from "../features/auth/components/login-form";
 import { BaseLayout } from "../layouts";
@@ -15,6 +15,8 @@ import { StudentsForm } from "../features/students-list/components/students";
 import { Posts } from "../pages/backend/posts";
 import { PostForm } from "../features/periods/components/posts-form";
 import { PostPage } from "../pages/frontend/posts";
+import { Teachers } from "../pages/backend/teachers";
+import { TeacherForm } from "../features/teachers/components/teacher-form";
 
 
 export type RouteObjectType = IndexRouteObject |
@@ -108,6 +110,18 @@ export const routes = (): RouteObjectType[] => {
                 {
                     path: `${ROUTE_POSTS}/:id`,
                     element: <PostForm />,
+                },
+                {
+                    path: `${ROUTE_TEACHERS}`,
+                    element: <Teachers />,
+                },
+                {
+                    path: `${ROUTE_TEACHERS}/create`,
+                    element: <TeacherForm />,
+                },
+                {
+                    path: `${ROUTE_TEACHERS}/:id`,
+                    element: <TeacherForm />,
                 },
             ]
         }

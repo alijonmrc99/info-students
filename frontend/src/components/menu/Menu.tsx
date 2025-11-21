@@ -4,7 +4,7 @@ import { Col, Row } from "antd";
 import { Language } from "../language";
 import { IMenuData, MenuDataContext } from "../../common/contexts";
 import { Link } from "react-router-dom";
-import { ROUTE_ABOUT, ROUTE_GRADES, ROUTE_POSTS, } from "../../common/constants/route.constants";
+import { ROUTE_ABOUT, ROUTE_GRADES, ROUTE_POSTS } from "../../common/constants/route.constants";
 import { useTranslation } from "react-i18next";
 
 export const Menu: FC = () => {
