@@ -5,7 +5,7 @@ import { Button, Col, Divider, Row } from "antd";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { TextFieldController } from "../../../../components/input/text-filed-controller";
-import { TEACHER_FULLNAME, TEACHER_EMAIL } from '../../constants'
+import { TEACHER_FULLNAME, TEACHER_EMAIL, TEACHER_PHONE } from '../../constants'
 import { useUsers } from "../../hooks";
 import { ID } from "../../../../common/models";
 import './sytles.scss';
@@ -63,6 +63,9 @@ export const TeacherForm: FC<{ level?: number, parentId?: ID }> = () => {
                 </Col>
                 <Col xs={24} md={12}>
                     <TextFieldController control={control} placeholder={t('email')} name={TEACHER_EMAIL} label={t('email')} />
+                </Col>
+                <Col xs={24} md={12}>
+                    <TextFieldController control={control} placeholder={t('phone')} name={TEACHER_PHONE} label={t('phone')} />
                 </Col>
 
                 <Col xs={24} md={12}>

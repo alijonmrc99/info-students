@@ -24,7 +24,7 @@ export async function getTeacherById(id) {
 }
 export async function getAllGrades() {
     return prisma.grade.findMany({
-        where: {},
+        where: { teacherId: null },
 
     });
 }
